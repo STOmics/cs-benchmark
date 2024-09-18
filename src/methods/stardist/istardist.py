@@ -9,11 +9,9 @@ import glob
 import numpy as np
 import cv2
 import tifffile
-from skimage.morphology import remove_small_objects
 
 from stardist.models import StarDist2D
 from csbdeep.utils import normalize
-from cellbin.image.wsi_split import SplitWSI
 from tqdm import tqdm
 
 def f_rgb2gray(img, need_not=False):
@@ -200,19 +198,6 @@ def stardist_seg(img, model):
     pred = f_instance2semantics_max(pred)
     return pred
 
-
-def seg(img, model):
-    win_size = (1024, 1024)
-    overlap = 16
-    sp_run = SplitWSI(img, win_size, overlap, 1, False, True, False, np.uint8, dst_shape=(img.shape[:2]))
-    sp_run.f_set_run_fun(stardist_seg, model)
-    sp_run.f_set_pre_fun(f_padding, win_size)
-    # sp_run.f_set_fusion_fun(f_fusion)
-    _, _, pred = sp_run.f_split2run()
-    pred = np.uint8(remove_small_objects(pred > 0, min_size=2))
-    return pred
-
-
 def run(file_lst, out_path,img_type):
     os.makedirs(out_path, exist_ok=True)
     if img_type.lower()=='he':
@@ -233,7 +218,7 @@ def run(file_lst, out_path,img_type):
                     #img = f_rgb2gray(img, True)
                     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             img = pre(img)
-            mask = seg(img, model)
+            mask = stardist_seg(img, model)
             mask[mask > 0] = 255
             tifffile.imwrite(os.path.join(out_path, name), mask, compression='zlib')
         except:
