@@ -5,10 +5,8 @@ import os
 from segment_anything import sam_model_registry, SamAutomaticMaskGenerator
 import tifffile
 import numpy as np
-from cellbin.image.wsi_split import SplitWSI
 import cv2
 import traceback
-from skimage.morphology import remove_small_objects
 from tqdm import tqdm
 
 def f_ij_16_to_8(img, chunk_size=1000):
@@ -196,20 +194,6 @@ def sam_seg(img, mask_generator):
     mask = f_anns2instance(mask)
     return mask
 
-
-def seg(generator, img):
-    win_size = (512, 512)
-    overlap = 40
-
-    sp_run = SplitWSI(img, win_size, overlap, 1, False, True, False, np.uint8, dst_shape=(img.shape[:2]))
-    sp_run.f_set_run_fun(sam_seg, generator)
-    sp_run.f_set_pre_fun(f_padding, win_size)
-    #sp_run.f_set_fusion_fun(f_fusion)
-    _, _, pred = sp_run.f_split2run()
-    pred = np.uint8(remove_small_objects(pred > 0, min_size=2))
-    return pred
-
-
 def run(file_lst, out_path, sam_checkpoint, device):
     model_type = "vit_b"
     device = device
@@ -229,7 +213,7 @@ def run(file_lst, out_path, sam_checkpoint, device):
             img = f_ij_16_to_8(img, chunk_size=1000000)
             if img.ndim != 3:
                 img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
-            mask = seg(mask_generator, img)
+            mask = sam_seg(img, mask_generator)
             mask[mask > 0] = 255
             tifffile.imwrite(os.path.join(out_path,name), mask, compression='zlib')
         except:
