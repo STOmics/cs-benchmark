@@ -49,7 +49,7 @@ import pandas as pd
 import subprocess
 # Constants
 ENV = '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/benchmark/bin/python'
-cellmorphology_PY = '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/eval/cellmorphology/maskanalysis.py'
+cellmorphology_PY = 'cellmorphology/maskanalysis.py'
 
 
 def sub_run(cmd):

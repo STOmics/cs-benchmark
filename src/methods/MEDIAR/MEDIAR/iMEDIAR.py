@@ -22,8 +22,8 @@ def MEDIAR_method(para, args):
     if os.path.isdir(para.image_path):
         imgs = cell_dataset(para.image_path, ['.tif', '.jpg', '.png'])
     else: imgs = [para.image_path]
-    model_path1 = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark/src/methods/MEDIAR/MEDIAR/weights/from_phase1.pth"
-    model_path2 = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark/src/methods/MEDIAR/MEDIAR/weights/from_phase2.pth"
+    model_path1 = "weights/from_phase1.pth"
+    model_path2 = "weights/from_phase2.pth"
     weights1 = torch.load(model_path1, map_location="cpu")
     weights2 = torch.load(model_path2, map_location="cpu")
 
@@ -66,10 +66,6 @@ def main():
 
     arg_parser.set_defaults(func=MEDIAR_method)
     (para, args) = arg_parser.parse_known_args()
-    # weights = os.path.join(os.path.abspath('.'), "weights/cellpose")
-    # models_logger.info('Load Model - Cellpose from {}'.format(weights))
-    
-    # os.environ["CELLPOSE_LOCAL_MODELS_PATH"] = weights
     para.func(para, args)
 
 

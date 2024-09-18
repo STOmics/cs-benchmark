@@ -25,26 +25,18 @@ def cellpose_method(para, args):
     chan = [0, 0]
     for i in tqdm.tqdm(range(len(imgs)), 'Cellpose3'):
         filename = imgs[i]
-        width,height = get_image_size(filename)
-        if width+height > 10000:
-            out_file = auto_make_dir(filename, src=para.image_path, output=output_path)
-            cmd = '{} {} -i {} -o {} -g {} -m {}'.format('/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose/bin/python', 
-                                                   '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/cellpose/cellpose_seg.py', 
-                                        input_path, output_path, '0','cyto3')
-            os.system(cmd)
-        else:
-            img = io.imread(filename)
-            if img_type == 'he':
-                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-                img = cv2.bitwise_not(img)
-            masks, flows, styles, diams = model.eval(img, diameter=None, channels=chan)
-            out_file = auto_make_dir(filename, src=para.image_path, output=output_path)
-            semantics = instance2semantics(masks)
-            semantics[semantics > 0] = 255
-            if not os.path.exists(output_path):
-                os.makedirs(output_path)
-            name = os.path.split(filename)[-1]    
-            tifffile.imwrite(os.path.join(output_path,name), semantics, compression='zlib')
+        img = io.imread(filename)
+        if img_type == 'he':
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            img = cv2.bitwise_not(img)
+        masks, flows, styles, diams = model.eval(img, diameter=None, channels=chan)
+        out_file = auto_make_dir(filename, src=para.image_path, output=output_path)
+        semantics = instance2semantics(masks)
+        semantics[semantics > 0] = 255
+        if not os.path.exists(output_path):
+            os.makedirs(output_path)
+        name = os.path.split(filename)[-1]    
+        tifffile.imwrite(os.path.join(output_path,name), semantics, compression='zlib')
 
 
 

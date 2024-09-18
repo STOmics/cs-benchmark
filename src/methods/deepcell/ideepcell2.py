@@ -33,9 +33,9 @@ def f_fillHole(im_in):
 
 models = {
     # whole-cell 质", "nuclear 核", "both"
-    "Mesmer": os.path.join(os.path.abspath('.'), "weights/deepcell/MultiplexSegmentation"),  # 多重分割
-    "Nuclear": os.path.join(os.path.abspath('.'), "weights/deepcell/NuclearSegmentation"),  # 核分割
-    "Cytoplasm": os.path.join(os.path.abspath('.'), "weights/deepcell/CytoplasmSegmentation")  # 细胞质分割
+    "Mesmer": "MultiplexSegmentation",  # 多重分割
+    "Nuclear": "NuclearSegmentation",  # 核分割
+    "Cytoplasm": "CytoplasmSegmentation"  # 细胞质分割
 }
 
 
@@ -70,14 +70,16 @@ def deepcell_method(para, args):
     app = Mesmer(model_)
     
     for it in tqdm.tqdm(imgs, desc="Deepcell"):
-        img = cv2.imread(it, 0)
+        img = cv2.imread(it,cv2.IMREAD_GRAYSCALE )
         im = np.stack((img, img), axis=-1)
         im = np.expand_dims(im, 0)
         mask = app.predict(im, image_mpp=0.5, compartment='nuclear')
+        mask = np.squeeze(mask) 
         semantics = instance2semantics(mask)
         semantics[semantics > 0] = 255
         out_file = auto_make_dir(it, src=para.image_path, output=output_path)
         tifffile.imwrite(out_file, semantics, compression='zlib')
+            
     models_logger.info('Dump result to {}'.format(output_path))
     
 
