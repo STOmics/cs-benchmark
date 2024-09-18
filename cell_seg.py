@@ -22,9 +22,9 @@ __script__ = {
     'cellpose': os.path.join(work_path, '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/cellpose/icellpose.py'),
     'cellpose3':os.path.join(work_path,'/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/cellpose3/icellpose3.py'),
     'deepcell': os.path.join(work_path, '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/deepcell/ideepcell2.py'),
-    'sam': os.path.join(work_path, '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/segment/sam_main.py'),
+    'sam': os.path.join(work_path, '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/sam_main.py'),
     'lt': os.path.join(work_path, '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/lt.py'),
-    'stardist':os.path.join(work_path,'/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/segment/stardist_main.py')
+    'stardist':os.path.join(work_path,'/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/stardist_main.py')
 }
 v3_model_ss = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/segment/models/cellseg_bcdu_SHDI_221008_tf.onnx"
 v3_model_he = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/segment/models/cellseg_bcdu_H_231221_tf.onnx"
