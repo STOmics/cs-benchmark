@@ -38,7 +38,10 @@ To evaluate the relative performance of different deep learning architectures, w
  - F1,
 
 ## Cell Segmentation Platform Usage  
-Usage on linux  
+```
+git clone https://github.com/STOmics/cs-benchmark.git  
+cd cs-benchmark 
+```
 ### Supported Cell Segmentation Algorithms  
 MEDIAR, Cellpose, Cellpose3, SAM,  Stardist  
 ### Environment configuration

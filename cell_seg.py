@@ -6,28 +6,24 @@ import argparse
 work_path = os.path.abspath('.')
 # work_path = '/data/work/benchmark/benchmark'
 __py__ = {
-    'MEDIAR':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/MEDIAR/bin/python',
-    'cellpose': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose/bin/python',
-    'cellpose3':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose3/bin/python',
-    'deepcell': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/deepcell/bin/python',
-    'sam': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/sam/bin/python',
-    'lt': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/benchmark/bin/python',
-    'stardist':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/stardist/bin/python',
+    'MEDIAR':'anaconda3/envs/MEDIAR/bin/python',
+    'cellpose': 'anaconda3/envs/cellpose/bin/python',
+    'cellpose3':'anaconda3/envs/cellpose3/bin/python',
+    'deepcell': 'anaconda3/envs/deepcell/bin/python',
+    'sam': 'anaconda3/envs/sam/bin/python',
+    'stardist':'home/anaconda3/envs/stardist/bin/python',
 }
-__methods__ = ['MEDIAR','cellpose','cellpose3', 'sam', 'lt','v3','stardist']
+__methods__ = ['MEDIAR','cellpose','cellpose3', 'sam','stardist','deepcell']
 
 
 __script__ = {
-    'MEDIAR':os.path.join(work_path,'/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/MEDIAR/MEDIAR/iMEDIAR.py'),
-    'cellpose': os.path.join(work_path, '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/cellpose/icellpose.py'),
-    'cellpose3':os.path.join(work_path,'/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/cellpose3/icellpose3.py'),
-    'deepcell': os.path.join(work_path, '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/deepcell/ideepcell2.py'),
-    'sam': os.path.join(work_path, '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/sam_main.py'),
-    'lt': os.path.join(work_path, '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/lt.py'),
-    'stardist':os.path.join(work_path,'/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/src/methods/stardist_main.py')
+    'MEDIAR':os.path.join(work_path,'src/methods/MEDIAR/MEDIAR/iMEDIAR.py'),
+    'cellpose': os.path.join(work_path, 'src/methods/cellpose/icellpose.py'),
+    'cellpose3':os.path.join(work_path,'src/methods/cellpose3/icellpose3.py'),
+    'deepcell': os.path.join(work_path, 'src/methods/deepcell/ideepcell2.py'),
+    'sam': os.path.join(work_path, 'src/methods/sam_main.py'),
+    'stardist':os.path.join(work_path,'src/methods/stardist_main.py')
 }
-v3_model_ss = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/segment/models/cellseg_bcdu_SHDI_221008_tf.onnx"
-v3_model_he = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/benchmark2/segment/models/cellseg_bcdu_H_231221_tf.onnx"
 
 USAGE = 'cell_seg'
 PROG_VERSION = 'v0.0.1'
@@ -45,24 +41,16 @@ def main():
     image_path = args.input
     output_path = args.output
     methods = args.method
-    gpu = args.gpu
+    is_gpu = args.gpu
     img_type = args.img_type
-    is_gpu = True
+    
     if os.path.isdir(image_path):
         print(f'get {len(os.listdir(image_path))} files')
     for m in methods: assert m in __methods__
     for m in methods:
         start = time.time()
-        if m == 'v3':
-            if is_gpu == True:
-                gpu = '0'
-            if str.lower(img_type) == "he":
-                cmd = f'{__py__[m]} {__script__[m]} -i {image_path} -o {os.path.join(output_path, m)} -g {gpu} -p {v3_model_he} -t {img_type}'
-            else:
-                cmd = f'{__py__[m]} {__script__[m]} -i {image_path} -o {os.path.join(output_path, m)} -g {gpu} -p {v3_model_ss} -t {img_type}'
-        else:
-            cmd = '{} {} -i {} -o {} -g {} -t {}'.format(__py__[m], __script__[m], 
-                                        image_path, os.path.join(output_path, m), is_gpu, img_type)
+        cmd = '{} {} -i {} -o {} -g {} -t {}'.format(__py__[m], __script__[m], 
+                                    image_path, os.path.join(output_path, m), is_gpu, img_type)
         os.system(cmd)
         t = time.time() - start
         print('{} ran for a total of {} s'.format(m, t))
