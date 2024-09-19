@@ -4,38 +4,27 @@
 
 We have deployed the following 7 cell segmentation methods:
 
-> [Cellpose](https://github.com/MouseLand/cellpose) is a generalist algorithm for cellular segmentation.<br>
-> [DeepCell](https://github.com/vanvalenlab/deepcell-tf) is a deep learning library for single-cell analysis of biological images. Here, pre-trained DeepCell models are used for cell/nuclei segmentation from raw image data.<br><br>
-> [StereoCell](https://github.com/STOmics/StereoCell/tree/dev) is an open-source software for measuring and analyzing cell images. Here, CellProfiler is used for object detection and region growth-based object segmentation.<br><br>
-> [SAM](https://github.com/facebookresearch/segment-anything) is an open-source software for measuring and analyzing cell images. Here, CellProfiler is used for object detection and region growth-based object<br><br>
-> [MEDIAR]()  <br><br>
-> [stardist]()  <br><br>
-> [cellprofiler]()  <br><br>
+> [Cellpose](https://github.com/MouseLand/cellpose) is a generalist algorithm for cell and nucleus segmentation. Cellpose can segment many types of cell without requiring parameter adjustments, new training data or further model retraining. Cellpose uses the 'cyto' model, with the channels for grayscale images set to [0,0] and for H&E images set to [1,3]. The diameter is set to None. <br><br>
+> [Cellpose3](https://github.com/MouseLand/cellpose) is a generalist algorithm for cell and nucleus segmentation that can perform image restoration. Cellpose 3 uses the 'cyto3' model, with the channels for grayscale images set to [0,0] and for HE images set to [1,3]. The diameter is set to None, and the 'denoise_cyto3' model is used for noisy images. <br><br>
+> [DeepCell](https://github.com/vanvalenlab/deepcell-tf) is a deep learning library for single-cell analysis of biological images. Here, pre-trained DeepCell models are used for cell/nuclei segmentation from raw image data. Deepcell uses the 'Mesmer' model, with image_map set to 0.5 and compartment set to 'nuclear'. <br><br>
+> [SAM](https://github.com/facebookresearch/segment-anything) is an open-source software for measuring and analyzing cell images. SAM claims that it has capability on Zero-shot generalization of new image distributions and tasks. The model_type of SAM uses 'vit_b' and utilizes SamAutomaticMaskGenerator to automatically generate masks without the need for external prompts. <br><br>
+> [MEDIAR](https://github.com/Lee-Gihun/MEDIAR) is a framework for efficient cell instance segmentation of multi-modality microscopy images. MEDAIR stood out in the NeurIPS 2022 cell segmentation competition and achieved state of the art (SOTA). MEDIAR uses the provided from_phase2.pth model, with model_args configured as follows: 'classes' is set to 3, 'decoder_channels' is set to [1024, 512, 256, 128, 64], 'decoder_pab_channels' is set to 256, 'encoder_name' is set to 'mit_b5', and 'in_channels' is set to 3. The algo_params has 'use_tta' set to True. <br><br>
+> [stardist](https://github.com/stardist/stardist) uses star-convex polygons to represent cell shapes, allowing accurate cell localization even under challenging conditions. StarDist uses the '2D_versatile_he' model for HE images and the '2D_demo' model for non-HE images. <br><br>
+> [cellprofiler](https://github.com/CellProfiler) is a free open-source software designed to enable biologists without training in computer vision or programming to quantitatively measure phenotypes from thousands of images automatically. <br><br>
 
 ## Data
 
-Here, we present the StereoCell cell segmentation test dataset to compare the performance of different segmentation methods. Recent studies have shown that the diversity of data modalities, complex differences in image backgrounds, and cell distribution and morphology pose great challenges to segmentation methods. Therefore, we chose imaging data under [stereo-seq]() technology to construct a test set, covering 4 staining methods, namely: ssDNA, [HE](), [FB]() and [mIF](); all 42 ROIs in the test set come from 11 animal sections and 1 plant tissue sample. The test dataset is available at https://datasets.deepcell.org/ for noncommercial use.
+Here, we present a new dataset to compare the performance of different segmentation methods. Recent studies have shown that the diversity of data modalities, complex differences in image backgrounds, and cell distribution and morphology pose great challenges to segmentation methods. 
+The dataset consists of 1,044 annotated microscopy images, with a total of 109,083 cell annotations, including four staining types: DAPI, ssDNA, H&E, and mIF. The dataset contains two species, human and mouse, and includes more than 30 types of histologically normal tissues and diseased tissue (such as skin melanoma). The images in the dataset come from two sources: unpublished experimental data and open-source platform [10×Genomics](https://www.10xgenomics.com/datasets). The test dataset is available for noncommercial use.
 
 <div align="center">
-    <img src="docs/slice.png" width=60% height=60% alt="Fig StereoCell benchmarking" />
+    <img src="docs/slice.png" width=60% height=60% alt="Fig 1" />
     <h6>
-      Fig 1 Benchmarking for stereo-seq Image Data
+      Fig 1 Image Data
     </h6>
 </div>
 
 # Benchmarking
-## Index
-<div align="center">
-    <img src="docs/seg.png" width=50% height=50% alt="Single-cell Stereo-seq reveals induced progenitor cells involved in axolotl brain regeneration" />
-    <h6>
-      Fig 2 precision and recall for cell segmentation
-    </h6>
-</div>
-
-To evaluate the relative performance of different deep learning architectures, we compared several alternatives: StereoCell (kernel), Deepcell (whole-cell), Cellpose (whole-cell), SAM (whole-cell), and LT. All methods are evaluated on the StereoCell test set.
- - precision,
- - recall,
- - F1,
 
 ## Cell Segmentation Platform Usage  
 ```
