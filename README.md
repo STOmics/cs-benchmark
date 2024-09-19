@@ -24,21 +24,26 @@ The dataset consists of 1,044 annotated microscopy images, with a total of 109,0
     </h6>
 </div>
 
-# Benchmarking
-
-## Cell Segmentation Platform Usage  
+## Installation
+Supported Cell Segmentation Algorithms: MEDIAR, Cellpose, Cellpose3, SAM,  Stardist, Deepcell
+### Cell Segmentation Platform
 ```
 git clone https://github.com/STOmics/cs-benchmark.git  
 cd cs-benchmark 
 ```
-### Supported Cell Segmentation Algorithms  
-MEDIAR, Cellpose, Cellpose3, SAM,  Stardist, Deepcell
-### Environment configuration
+
+#### Environment configuration
 Use the following command to install the environment for the methods you need, and add the path in the cellsegmentation_benchmark.ipynb or cell_seg.py  **\_py_**  
 ```
 conda env create -f src/methods/method_name/enviroment.yaml
 ```
-### Usage via Command Line  
+#### Download the necessary model file
+
+[sam_vit_b_01ec64.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)  
+[MEDIAR](https://drive.google.com/drive/folders/1eZLGuQkxF5ouBgTA2UuH0beLcm635ADS)  
+After downloading the model file, place it in the **src/methods/models** directory of the project.
+
+## Getting Started
 Modify the parameters in the following command and input it into the command line:  
 ```
 python cell_seg.py -i your_inputpath -o your_outputpath -m  cellpose3 sam v3  -t ss/he -g 0  
@@ -50,27 +55,16 @@ Where:
 -m is the algorithm(s) to be used (can specify multiple)  
 -t is the image type (use "ss" if not HE)  
 -g is the GPU index (num or False)  
-### How to use cellprofiler
+## How to use cellprofiler
 
 ## Segmentation Evaluation Usage
 Ensure that the images in the gt folder have filenames with "_mask" and the images in the algorithm output mask folder have filenames with "_img", with only this difference in their names.
 ### Environment configuration
-pip install tqdm  
-pip install numpy  
-pip install tifffile  
-pip install opencv-python  
-pip install scikit-image  
-pip install pandas  
-pip install scikit-learn  
-pip install matplotlib  
-pip install seaborn  
-pip install cython six openpyxl  
+pip install tqdm numpy tifffile opencv-python scikit-image pandas scikit-learn matplotlib seaborn cython six openpyxl  
 cd src/eval  
 python setup.py install --user  
 
-
-
-### Usage via Command Line
+### Getting Started
 
 Modify the parameters in the following command and input it into the command line:
 ```

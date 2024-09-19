@@ -22,8 +22,8 @@ def MEDIAR_method(para, args):
     if os.path.isdir(para.image_path):
         imgs = cell_dataset(para.image_path, ['.tif', '.jpg', '.png'])
     else: imgs = [para.image_path]
-    model_path1 = "weights/from_phase1.pth"
-    model_path2 = "weights/from_phase2.pth"
+    model_path1 = "../../models/from_phase1.pth"
+    model_path2 = "../../models/from_phase2.pth"
     weights1 = torch.load(model_path1, map_location="cpu")
     weights2 = torch.load(model_path2, map_location="cpu")
 
