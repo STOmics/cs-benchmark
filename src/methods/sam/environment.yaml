@@ -2,8 +2,9 @@ name: sam
 channels:
   - pytorch
   - nvidia
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - conda-forge
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
@@ -66,7 +67,6 @@ dependencies:
   - ncurses=6.4=h6a678d5_0
   - nettle=3.7.3=hbbd107a_1
   - networkx=3.1=py38h06a4308_0
-  - numpy-base=1.24.3=py38h060ed82_1
   - openh264=2.1.1=h4ff587b_0
   - openjpeg=2.4.0=h3ad879b_0
   - openssl=3.0.13=h7f8727e_0
@@ -94,29 +94,43 @@ dependencies:
   - zlib=1.2.13=h5eee18b_0
   - zstd=1.5.5=hc292b87_0
   - pip:
+      - cell-bin==1.3.4.1
+      - cffi==1.17.1
       - coloredlogs==15.0.1
+      - contourpy==1.1.1
       - cycler==0.12.1
       - flatbuffers==24.3.7
       - fonttools==4.49.0
+      - h5py==3.8.0
       - humanfriendly==10.0
       - imagecodecs==2023.3.16
       - imageio==2.34.0
+      - importlib-resources==6.4.5
+      - joblib==1.4.2
       - kiwisolver==1.4.5
       - lazy-loader==0.3
-      - matplotlib==3.5.3
-      - numpy==1.24.4
+      - matplotlib==3.7.1
+      - numpy==1.23.5
       - onnx==1.15.0
-      - onnxruntime==1.16.3
+      - onnxruntime==1.15.1
+      - opencv-python==4.8.0.76
       - opencv-python-headless==4.9.0.80
       - packaging==23.2
+      - pandas==1.5.3
       - protobuf==4.25.3
       - pycocotools==2.0.7
+      - pycparser==2.22
       - pyparsing==3.1.2
       - python-dateutil==2.9.0.post0
+      - pytz==2024.2
+      - pyvips==2.2.1
       - pywavelets==1.4.1
       - scikit-image==0.21.0
+      - scikit-learn==1.3.0
       - scipy==1.10.1
       - six==1.16.0
-      - tifffile==2023.7.10
+      - threadpoolctl==3.5.0
+      - tifffile==2023.2.3
       - tiffile==2018.10.18
-      - tqdm==4.66.2
+      - tqdm==4.65.0
+      - zipp==3.20.2
