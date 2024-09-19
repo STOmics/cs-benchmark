@@ -1,4 +1,4 @@
 src/methods/models/from_phase1.pth
 src/methods/models/from_phase2.pth
 src/methods/models/sam_vit_b_01ec64.pth
-
+**/*.__pycache__

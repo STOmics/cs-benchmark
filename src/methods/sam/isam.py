@@ -197,7 +197,7 @@ def sam_seg(img, mask_generator):
 def run(file_lst, out_path, sam_checkpoint, device):
     model_type = "vit_b"
     device = device
-    sam_checkpoint = 'sam/sam_vit_b_01ec64.pth'
+    sam_checkpoint = '../models/sam_vit_b_01ec64.pth'
     sam = sam_model_registry[model_type](checkpoint=sam_checkpoint)
     sam.to(device=device)
     mask_generator = SamAutomaticMaskGenerator(sam)

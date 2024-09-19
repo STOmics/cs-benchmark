@@ -11,7 +11,7 @@ __py__ = {
     'cellpose3':'anaconda3/envs/cellpose3/bin/python',
     'deepcell': 'anaconda3/envs/deepcell/bin/python',
     'sam': 'anaconda3/envs/sam/bin/python',
-    'stardist':'home/anaconda3/envs/stardist/bin/python',
+    'stardist':'/anaconda3/envs/stardist/bin/python',
 }
 __methods__ = ['MEDIAR','cellpose','cellpose3', 'sam','stardist','deepcell']
 
@@ -21,8 +21,8 @@ __script__ = {
     'cellpose': os.path.join(work_path, 'src/methods/cellpose/icellpose.py'),
     'cellpose3':os.path.join(work_path,'src/methods/cellpose3/icellpose3.py'),
     'deepcell': os.path.join(work_path, 'src/methods/deepcell/ideepcell2.py'),
-    'sam': os.path.join(work_path, 'src/methods/sam_main.py'),
-    'stardist':os.path.join(work_path,'src/methods/stardist_main.py')
+    'sam': os.path.join(work_path, 'src/methods/sam/isam.py'),
+    'stardist':os.path.join(work_path,'src/methods/stardist/istardist.py')
 }
 
 USAGE = 'cell_seg'
