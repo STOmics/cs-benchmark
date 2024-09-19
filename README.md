@@ -45,7 +45,7 @@ cd cs-benchmark
 ### Supported Cell Segmentation Algorithms  
 MEDIAR, Cellpose, Cellpose3, SAM,  Stardist, Deepcell
 ### Environment configuration
-Use the following command to install the environment for the methods you need, and add the path in the cellsegmentation_benchmark.ipynb **\_py_**  
+Use the following command to install the environment for the methods you need, and add the path in the cellsegmentation_benchmark.ipynb or cell_seg.py  **\_py_**  
 ```
 conda env create -f src/methods/method_name/enviroment.yaml
 ```
