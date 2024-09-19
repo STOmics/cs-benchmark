@@ -43,7 +43,7 @@ git clone https://github.com/STOmics/cs-benchmark.git
 cd cs-benchmark 
 ```
 ### Supported Cell Segmentation Algorithms  
-MEDIAR, Cellpose, Cellpose3, SAM,  Stardist  
+MEDIAR, Cellpose, Cellpose3, SAM,  Stardist, Deepcell
 ### Environment configuration
 Use the following command to install the environment for the methods you need, and add the path in the cellsegmentation_benchmark.ipynb **\_py_**  
 ```
