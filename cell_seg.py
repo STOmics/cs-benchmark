@@ -12,8 +12,9 @@ __py__ = {
     'deepcell': 'python',
     'sam': 'python',
     'stardist':'python',
+    'cellprofiler':'anaconda3/envs/cp4/bin/python'
 }
-__methods__ = ['MEDIAR','cellpose','cellpose3', 'sam','stardist','deepcell']
+__methods__ = ['MEDIAR','cellpose','cellpose3', 'sam','stardist','deepcell','cellprofiler']
 
 
 __script__ = {
@@ -22,7 +23,8 @@ __script__ = {
     'cellpose3':os.path.join(work_path,'src/methods/cellpose3_main.py'),
     'deepcell': os.path.join(work_path, 'src/methods/deepcell_main.py'),
     'sam': os.path.join(work_path, 'src/methods/sam_main.py'),
-    'stardist':os.path.join(work_path,'src/methods/stardist_main.py')
+    'stardist':os.path.join(work_path,'src/methods/stardist_main.py'),
+    'cellprofiler':os.path.join(work_path,'src/methods/cellprofiler/cellprofiler_main.py')
 }
 
 USAGE = 'cell_seg'
