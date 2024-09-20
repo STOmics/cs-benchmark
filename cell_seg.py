@@ -17,7 +17,7 @@ __methods__ = ['MEDIAR','cellpose','cellpose3', 'sam','stardist','deepcell']
 
 
 __script__ = {
-    'MEDIAR':os.path.join(work_path,'src/methods/mediar_main.py'),
+    'MEDIAR':os.path.join(work_path,'src/methods/MEDIAR/mediar_main.py'),
     'cellpose': os.path.join(work_path, 'src/methods/cellpose_main.py'),
     'cellpose3':os.path.join(work_path,'src/methods/cellpose3_main.py'),
     'deepcell': os.path.join(work_path, 'src/methods/deepcell_main.py'),

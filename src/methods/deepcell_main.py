@@ -13,7 +13,6 @@ models_logger = logging.getLogger(__name__)
 
 
 def f_fillHole(im_in):
-    ''' 对二值图像进行孔洞填充 '''
     im_floodfill = cv2.copyMakeBorder(im_in, 2, 2, 2, 2, cv2.BORDER_CONSTANT, value=[0])
     # im_floodfill = im_in.copy()
     # Mask used to flood filling.
