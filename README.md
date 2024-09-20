@@ -60,7 +60,7 @@ python src/eval/cell_eval_multi.py -g gt_path -d dt_path -o result_path
 -o is the output path for the results  
 
 ### Use via Notebook
-[cellsegmentation_benchmark.ipynb](https://github.com/STOmics/cs-benchmark/blob/main/cellsegmentation_benchmark.ipynb)
+[cellsegmentation_benchmark.ipynb](https://github.com/STOmics/cs-benchmark/blob/main/tutorial/cellsegmentation_benchmark.ipynb)
 
 ## License and Citation
 
