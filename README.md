@@ -22,7 +22,7 @@ pip install git+https://github.com/facebookresearch/segment-anything.git
 
 - Use the following command to install the environment for **mediar**, and add the path in the cellsegmentation_benchmark.ipynb or cell_seg.py  **\_py_**  
 ```
-conda env create -f src/methods/MEDIAR/enviroment.yaml
+conda env create -f src/methods/MEDIAR/environment.yaml
 ```
 - Download the necessary model file
 
