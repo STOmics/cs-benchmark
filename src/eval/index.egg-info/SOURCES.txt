@@ -1,7 +1,0 @@
-compute_overlap.pyx
-setup.py
-index.egg-info/PKG-INFO
-index.egg-info/SOURCES.txt
-index.egg-info/dependency_links.txt
-index.egg-info/requires.txt
-index.egg-info/top_level.txt
