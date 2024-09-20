@@ -2,7 +2,7 @@
 
 ## Introduction
 
-We have deployed the following 7 cell segmentation methods:MEDIAR, Cellpose, Cellpose3, SAM,  Stardist, Deepcell
+We have deployed the following 7 cell segmentation methods:MEDIAR, Cellpose, Cellpose3, SAM,  Stardist, Deepcell, Cellprofiler
 
 ## Installation
 
@@ -20,13 +20,14 @@ pip install -r requirements.txt
 pip install git+https://github.com/facebookresearch/segment-anything.git
 ```
 
-- Use the following command to install the environment for **mediar**, and add the path in the cellsegmentation_benchmark.ipynb or cell_seg.py  **\_py_**  
+- Use the following command to install the environment for **mediar** and **cellprofiler**, and add the path in the cellsegmentation_benchmark.ipynb or cell_seg.py  **\_py_**  
 ```
 conda env create -f src/methods/MEDIAR/environment.yaml
+conda env create -f src/methods/cellprofiler/environment.yaml
 ```
 - Download the necessary model file
 
-- [sam_vit_b_01ec64.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)  
+    [sam_vit_b_01ec64.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)  
 [MEDIAR](https://drive.google.com/drive/folders/1eZLGuQkxF5ouBgTA2UuH0beLcm635ADS)  
 After downloading the model file, place it in the **src/methods/models** directory of the project.
 

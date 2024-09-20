@@ -126,10 +126,10 @@ SaveImages:[module_num:10|svn_version:'Unknown'|variable_revision_number:16|show
     Select image name for file prefix:cell
     Enter single file name:OrigBlue
     Number of digits:4
-    Append a suffix to the image file name?:Yes
+    Append a suffix to the image file name?:No
     Text to append to the image name:_mask
     Saved file format:tif
-    Output file location:Elsewhere...|D:\\open_dataset\\bbbc\\BBBC039\\result\\cellprofiler
+    Output file location:Default Output Folder|D:\\open_dataset\\bbbc\\BBBC039\\result\\cellprofiler
     Image bit depth:8-bit integer
     Overwrite existing files without warning?:Yes
     When to save:Every cycle
