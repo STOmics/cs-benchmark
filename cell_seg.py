@@ -7,22 +7,22 @@ work_path = os.path.abspath('.')
 # work_path = '/data/work/benchmark/benchmark'
 __py__ = {
     'MEDIAR':'anaconda3/envs/MEDIAR/bin/python',
-    'cellpose': 'anaconda3/envs/cellpose/bin/python',
-    'cellpose3':'anaconda3/envs/cellpose3/bin/python',
-    'deepcell': 'anaconda3/envs/deepcell/bin/python',
-    'sam': 'anaconda3/envs/sam/bin/python',
-    'stardist':'/anaconda3/envs/stardist/bin/python',
+    'cellpose': 'python',
+    'cellpose3':'python',
+    'deepcell': 'python',
+    'sam': 'python',
+    'stardist':'python',
 }
 __methods__ = ['MEDIAR','cellpose','cellpose3', 'sam','stardist','deepcell']
 
 
 __script__ = {
-    'MEDIAR':os.path.join(work_path,'src/methods/MEDIAR/MEDIAR/iMEDIAR.py'),
-    'cellpose': os.path.join(work_path, 'src/methods/cellpose/icellpose.py'),
-    'cellpose3':os.path.join(work_path,'src/methods/cellpose3/icellpose3.py'),
-    'deepcell': os.path.join(work_path, 'src/methods/deepcell/ideepcell2.py'),
-    'sam': os.path.join(work_path, 'src/methods/sam/isam.py'),
-    'stardist':os.path.join(work_path,'src/methods/stardist/istardist.py')
+    'MEDIAR':os.path.join(work_path,'src/methods/mediar_main.py'),
+    'cellpose': os.path.join(work_path, 'src/methods/cellpose_main.py'),
+    'cellpose3':os.path.join(work_path,'src/methods/cellpose3_main.py'),
+    'deepcell': os.path.join(work_path, 'src/methods/deepcell_main.py'),
+    'sam': os.path.join(work_path, 'src/methods/sam_main.py'),
+    'stardist':os.path.join(work_path,'src/methods/stardist_main.py')
 }
 
 USAGE = 'cell_seg'

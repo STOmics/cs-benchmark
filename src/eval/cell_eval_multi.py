@@ -48,9 +48,8 @@ import argparse
 import pandas as pd
 import subprocess
 # Constants
-ENV = '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/benchmark/bin/python'
-cellmorphology_PY = 'cellmorphology/maskanalysis.py'
-
+work_path = os.path.abspath('.')
+cellmorphology_PY = os.path.join(work_path,'src/eval/cellmorphology/maskanalysis.py')
 
 def sub_run(cmd):
     p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -66,7 +65,7 @@ def sub_run(cmd):
         print('Subprogram failed')
     return
 def cellmorphology(input, output):
-    cmd = f"{ENV} {cellmorphology_PY} -g {input} -o {output}"
+    cmd = f"python {cellmorphology_PY} -g {input} -o {output}"
     sub_run(cmd)
     return
 def draw_boxplot(directory,output_path):
