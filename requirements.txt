@@ -4,3 +4,5 @@ stardist==0.9.1
 six==1.16.0
 cython==0.29.37
 openpyxl==3.1.5
+torchvision==0.19.1
+seaborn==0.13.2
