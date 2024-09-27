@@ -56,3 +56,11 @@ def cellpose_channel_detect(mat):
     else:
         h, w, c = mat.shape
         mat = cv2.cvtColor(mat, cv2.COLOR_RGB2GRAY)
+
+def cvtColor(img): 
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    return img
+
+def bitwise_not(img):
+    img = cv2.bitwise_not(img)
+    return img

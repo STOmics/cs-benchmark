@@ -7,7 +7,7 @@ import argparse
 import tqdm
 import logging
 models_logger = logging.getLogger(__name__)
-from utils import cell_dataset, auto_make_dir, instance2semantics
+from utils import cell_dataset, auto_make_dir, instance2semantics,cvtColor,bitwise_not
 import cv2
 def get_image_size(image_path):
     img = cv2.imread(image_path)
@@ -20,16 +20,15 @@ def cellpose_method(para, args):
         imgs = cell_dataset(para.image_path, ['.tif', '.jpg', '.png'])
     else: imgs = [para.image_path]
     img_type = para.img_type
-    model = denoise.CellposeDenoiseModel(gpu=True, model_type="cyto3",
-             restore_type="denoise_cyto3")
+    model = models.CellposeModel(gpu=True, model_type='cyto3')
     chan = [0, 0]
     for i in tqdm.tqdm(range(len(imgs)), 'Cellpose3'):
         filename = imgs[i]
         img = io.imread(filename)
         if img_type == 'he':
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            img = cv2.bitwise_not(img)
-        masks, flows, styles, diams = model.eval(img, diameter=None, channels=chan)
+            img = cvtColor(img, cv2.COLOR_BGR2GRAY)
+            img = bitwise_not(img)
+        masks, flows, styles = model.eval(img, diameter=None, channels=chan)
         out_file = auto_make_dir(filename, src=para.image_path, output=output_path)
         semantics = instance2semantics(masks)
         semantics[semantics > 0] = 255

@@ -8,7 +8,7 @@ import tqdm
 import logging
 import cv2
 models_logger = logging.getLogger(__name__)
-from utils import cell_dataset, auto_make_dir, instance2semantics
+from utils import cell_dataset, auto_make_dir, instance2semantics,cvtColor,bitwise_not
 
 
 def get_image_size(image_path):
@@ -33,8 +33,8 @@ def cellpose_method(para, args):
         filename = imgs[i]
         img = io.imread(filename)
         if img_type == 'he':
-            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            img = cv2.bitwise_not(img)
+            img = cvtColor(img, cv2.COLOR_BGR2GRAY)
+            img = bitwise_not(img)
         masks, flows, styles = model.eval(img, diameter=None, channels=chan)
         out_file = auto_make_dir(filename, src=para.image_path, output=output_path)
         semantics = instance2semantics(masks)
