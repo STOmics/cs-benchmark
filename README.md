@@ -2,7 +2,9 @@
 
 ## Introduction
 
-We have deployed the following 7 cell segmentation methods:MEDIAR, Cellpose, Cellpose3, SAM,  Stardist, Deepcell, Cellprofiler
+This project is a benchmark for general cell segmentation models. We have deployed the following 7 cell segmentation methods: MEDIAR, Cellpose, Cellpose3, SAM, Stardist, Deepcell, Cellprofiler, along with code to evaluate the model segmentation performance. Through the command line or notebook, you can run 7 segmentation models or evaluate the performance of 7 models with one click.
+
+
 
 ## Installation
 
@@ -33,8 +35,9 @@ After downloading the model file, place it in the **src/methods/models** directo
 
 ## Tutorials
 ### Data
-[Data download link](https://bgipan.genomics.cn/#/link/v2dKKUZf8M3YFpGWvB5g)
-password :ercY
+[Data download link](https://bgipan.genomics.cn/#/link/v2dKKUZf8M3YFpGWvB5g)  
+Contact fanjinghong@genomics.cn or shican@genomics.cn to obtain the password.  
+![figure1](docs/figure1.png)
 ### Use via command line
 #### Cell segmentation
 - Modify the parameters in the following command and input it into the command line:  
