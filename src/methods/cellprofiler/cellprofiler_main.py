@@ -14,6 +14,8 @@ def cellprofiler_method(para, args):
     pipeline = cellprofiler_core.pipeline.Pipeline()
     if para.img_type == 'he':
         pipeline.load(os.path.join(work_path, 'src/methods/cellprofiler/cellsegmentation_HE.cppipe'))
+    elif para.img_type == 'mif':
+        pipeline.load(os.path.join(work_path, 'src/methods/cellprofiler/cellsegmentation_mif.cppipe'))
     else:
         pipeline.load(os.path.join(work_path, 'src/methods/cellprofiler/cellsegmentation_erode.cppipe'))
     if not os.path.exists(para.output):

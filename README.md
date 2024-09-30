@@ -32,8 +32,9 @@ conda env create -f src/methods/cellprofiler/environment.yaml
 After downloading the model file, place it in the **src/methods/models** directory of the project.
 
 ## Tutorials
-### Test Data
-coming soon
+### Data
+[Data](https://bgipan.genomics.cn/#/link/v2dKKUZf8M3YFpGWvB5g)
+password :ercY
 ### Use via command line
 #### Cell segmentation
 - Modify the parameters in the following command and input it into the command line:  
@@ -45,7 +46,7 @@ python cell_seg.py -i your_inputpath -o your_outputpath -m  cellpose3 sam -t ss/
 - -i is the input image path  
 -o is the output mask path  
 -m is the algorithm(s) to be used (can specify multiple)  
--t is the image type (use "ss" if not HE)  
+-t is the image type (ss/he/dapi/mif)  
 -g is the GPU index (num)  
 #### Segmentation evaluation
 - Ensure that the images in the gt folder have filenames with "**_mask**" and the images in the algorithm output mask folder have filenames with "**_img**", with only this difference in their names.   

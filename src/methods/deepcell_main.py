@@ -8,7 +8,7 @@ import math
 import cv2
 import tqdm
 import logging
-from utils import cell_dataset, auto_make_dir, instance2semantics
+from utils import cell_dataset, auto_make_dir, instance2semantics,cvtColor,bitwise_not
 models_logger = logging.getLogger(__name__)
 
 
@@ -58,6 +58,7 @@ def deepcell_method(para, args):
     import tifffile
     
     output_path = para.output
+    img_type = para.img_type
     if os.path.isdir(para.image_path):
         imgs = cell_dataset(para.image_path, ['.tif', '.jpg', '.png'])
     else: imgs = [para.image_path]
@@ -68,7 +69,7 @@ def deepcell_method(para, args):
     app = Mesmer(model_)
     
     for it in tqdm.tqdm(imgs, desc="Deepcell"):
-        img = cv2.imread(it,cv2.IMREAD_GRAYSCALE )
+        img = cv2.imread(it,cv2.IMREAD_GRAYSCALE)
         im = np.stack((img, img), axis=-1)
         im = np.expand_dims(im, 0)
         mask = app.predict(im, image_mpp=0.5, compartment='nuclear')
@@ -96,7 +97,7 @@ def main():
                             type=str, default=None, help="FOV images storage location.")
     arg_parser.add_argument("-g", "--is_gpu", action="store", dest="is_gpu",
                             type=bool, default=False, help="Use GPU or not.")
-
+    arg_parser.add_argument("-t", "--img_type", help="ss/he")
     arg_parser.set_defaults(func=deepcell_method)
     (para, args) = arg_parser.parse_known_args()
     print(para, args)

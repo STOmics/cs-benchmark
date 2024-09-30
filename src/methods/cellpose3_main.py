@@ -16,8 +16,8 @@ def get_image_size(image_path):
 def cellpose_method(para, args):
     input_path = para.image_path
     output_path = para.output
-    if os.path.isdir(para.image_path):
-        imgs = cell_dataset(para.image_path, ['.tif', '.jpg', '.png'])
+    if os.path.isdir(input_path):
+        imgs = cell_dataset(input_path, ['.tif', '.jpg', '.png'])
     else: imgs = [para.image_path]
     img_type = para.img_type
     model = models.CellposeModel(gpu=True, model_type='cyto3')
@@ -25,11 +25,7 @@ def cellpose_method(para, args):
     for i in tqdm.tqdm(range(len(imgs)), 'Cellpose3'):
         filename = imgs[i]
         img = io.imread(filename)
-        if img_type == 'he':
-            img = cvtColor(img, cv2.COLOR_BGR2GRAY)
-            img = bitwise_not(img)
         masks, flows, styles = model.eval(img, diameter=None, channels=chan)
-        out_file = auto_make_dir(filename, src=para.image_path, output=output_path)
         semantics = instance2semantics(masks)
         semantics[semantics > 0] = 255
         if not os.path.exists(output_path):
@@ -39,7 +35,7 @@ def cellpose_method(para, args):
 
 
 
-USAGE = 'Celpose'
+USAGE = 'Cellpose3'
 PROG_VERSION = 'v0.0.1'
 
 def main():
