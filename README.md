@@ -33,13 +33,13 @@ After downloading the model file, place it in the **src/methods/models** directo
 
 ## Tutorials
 ### Data
-[Data](https://bgipan.genomics.cn/#/link/v2dKKUZf8M3YFpGWvB5g)
+[Data download link](https://bgipan.genomics.cn/#/link/v2dKKUZf8M3YFpGWvB5g)
 password :ercY
 ### Use via command line
 #### Cell segmentation
 - Modify the parameters in the following command and input it into the command line:  
 ```
-python cell_seg.py -i your_inputpath -o your_outputpath -m  cellpose3 sam -t ss/he -g 0  
+python cell_seg.py -i your_inputpath -o your_outputpath -m  cellpose3 sam -t ss -g 0  
 ```
 - Where:
 
