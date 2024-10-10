@@ -235,7 +235,12 @@ if __name__ == '__main__':
     input_path = args.input
     output_path = args.output
     sam_checkpoint = args.sam_checkpoint
-    device = (args.gpu == True) and "cuda:0" or "cpu"
+    if args.gpu == "True" or args.gpu is True:  
+        device = "cuda:0"
+    elif isinstance(args.gpu, int) and args.gpu >= 0:
+        device = f"cuda:{args.gpu}"
+    else:
+        device = "cpu"
     file_lst = []
     if os.path.isdir(input_path):
         file_lst = glob.glob(os.path.join(input_path, "*.tif")) + glob.glob(os.path.join(input_path, "*.png")) + glob.glob(os.path.join(input_path, "*.jpg"))
