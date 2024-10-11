@@ -24,7 +24,7 @@ def cellpose_method(para, args):
     else: imgs = [para.image_path]
     img_type = para.img_type
 
-    model = models.CellposeModel(gpu=True, model_type='cyto')
+    model = models.Cellpose(gpu=True, model_type='cyto')
 
     chan = [0, 0]
 
@@ -32,7 +32,7 @@ def cellpose_method(para, args):
     for i in tqdm.tqdm(range(len(imgs)), 'Cellpose'):
         filename = imgs[i]
         img = io.imread(filename)
-        masks, flows, styles = model.eval(img, diameter=None, channels=chan)
+        masks, flows, styles, diams  = model.eval(img, diameter=None, channels=chan)
         semantics = instance2semantics(masks)
         semantics[semantics > 0] = 255
         if not os.path.exists(output_path):
