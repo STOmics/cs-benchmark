@@ -80,12 +80,13 @@ def main():
         elif m == 'stardist' and img_type == 'he':
             cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
             __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type)
-        elif m == 'cellpose' or  m == 'cellpose3' or m == 'MEDIAR' and img_type == 'mif':
+        elif (m == 'cellpose' or  m == 'cellpose3' or m == 'MEDIAR') and img_type == 'mif':
             cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
             __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type)
         else:
             cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
                 __py__[m], __script__[m], processed_dir, os.path.join(output_path, m), is_gpu, img_type)
+        print(cmd)
         os.system(cmd)
         t = time.time() - start
         print('{} ran for a total of {} s'.format(m, t))
