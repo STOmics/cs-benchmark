@@ -11,7 +11,7 @@ Here is an evaluation example of DAPI staining in the [DEMO](https://github.com/
 
 
 ```
-git clone https://github.com/STOmics/cs-benchmark.git  
+git clone https://github.com/STOmics/cs-benchmark.git   
 cd cs-benchmark 
 ```
 - Create an environment for Cellpose, SAM, StarDist, and DeepCell.
