@@ -6,7 +6,7 @@ from skimage import measure
 from scipy.spatial.distance import cdist
 
 class CellMorphology:
-    def __init__(self, contour_points):
+    def __init__(self, contour_points, mask):
         """
         Initialize the CellMorphology class with the contour points of a cell.
 
@@ -14,6 +14,7 @@ class CellMorphology:
             contour_points (numpy.ndarray): Contour points of the cell.
         """
         self.contour_points = contour_points
+        self.mask = mask
 
     def calculate_area(self):
         """
@@ -139,7 +140,7 @@ class CellMorphology:
         if not self.contour_points.size:
             return None, None
 
-        properties = measure.regionprops(measure.label(self.contour_points))
+        properties = measure.regionprops(measure.label(self.mask))
         if not properties:
             return None, None
 
@@ -201,7 +202,7 @@ class CellImageAnalyzer:
                 self.morphology_stats.append([None] * 11)
                 continue
 
-            cell = CellMorphology(contour_points)
+            cell = CellMorphology(contour_points,self.image)
 
             cell_area = cell.calculate_area()
             cell_elongation = cell.calculate_elongation()
