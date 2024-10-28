@@ -40,8 +40,8 @@ def search_files(file_path, exts):
 
 def cell_dataset(file_path: str, exts: list):
     img_lst = search_files(file_path, exts)
-    return [i for i in img_lst if 'img' in i ]
-
+    #return [i for i in img_lst if 'img' in i ]
+    return img_lst
 
 def auto_make_dir(file_path: str, src: str, output: str):
     i_output_path = os.path.dirname(file_path.replace(src, output))
