@@ -19,11 +19,10 @@ models_logger = logging.getLogger(__name__)
 def MEDIAR_method(para, args):
     input_path = para.image_path
     output_path = para.output
-    if os.path.isdir(para.image_path):
-        imgs = cell_dataset(para.image_path, ['.tif', '.jpg', '.png'])
-    else: imgs = [para.image_path]
-    work_path = os.path.abspath('.')
-    model_path2 = os.path.join(work_path,'src/methods/models/from_phase2.pth')
+
+    model_path1 = "../../models/from_phase1.pth"
+    model_path2 = "../../models/from_phase2.pth"
+    weights1 = torch.load(model_path1, map_location="cpu")
     weights2 = torch.load(model_path2, map_location="cpu")
 
     model_args = {
@@ -33,7 +32,9 @@ def MEDIAR_method(para, args):
     "encoder_name": 'mit_b5',
     "in_channels": 3
     }
-    device = (para.is_gpu == True) and "cuda:0" or "cpu"
+    device = (args.is_gpu == True) and "cuda:0" or "cpu"
+    model1 = MEDIARFormer(**model_args)
+    model1.load_state_dict(weights1, strict=False)
     
     model2 = MEDIARFormer(**model_args)
     model2.load_state_dict(weights2, strict=False)
