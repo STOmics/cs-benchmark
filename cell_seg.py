@@ -4,6 +4,8 @@ import argparse
 import cv2
 import sys
 import numpy as np
+from PIL import Image
+from math import ceil
 
 work_path = os.path.abspath('.')
 __py__ = {
@@ -27,24 +29,45 @@ __script__ = {
     'cellprofiler': os.path.join(work_path, 'src/methods/cellprofiler/cellprofiler_main.py')
 }
 
-def split_image(image, max_size=2000):
-    height, width = image.shape[:2]
+def split_image(image, photo_size=2000, photo_step=1000):
+    overlap = photo_size - photo_step
+    act_step = ceil(overlap / 2)
     patches = []
-    for y in range(0, height, max_size):
-        for x in range(0, width, max_size):
-            patch = image[y:y+max_size, x:x+max_size]
-            patches.append((patch, (y, x)))
-    return patches, (height, width)
+    height, width = image.shape[:2]
+    padded_image = np.pad(image, ((act_step, act_step), (act_step, act_step), (0, 0)), 'constant')
 
-def stitch_patches(patches, image_size, max_size=2000):
+    for y in range(0, height, photo_step):
+        for x in range(0, width, photo_step):
+            patch = padded_image[y:y + photo_size, x:x + photo_size]
+            patches.append((patch, (y, x)))
+    
+    return patches, (height, width), act_step
+
+def stitch_patches(patches, image_size, act_step, max_size=2000):
     if len(patches[0][0].shape) == 3:
         full_image = np.zeros((image_size[0], image_size[1], 3), dtype=np.uint8)
     else:
         full_image = np.zeros(image_size, dtype=np.uint8)
-        
+
     for patch, (y, x) in patches:
-        full_image[y:y+patch.shape[0], x:x+patch.shape[1]] = patch
+        # If full_image is 3-channel and patch is single-channel, expand patch to 3 channels
+        if full_image.ndim == 3 and patch.ndim == 2:
+            patch = np.stack([patch] * 3, axis=-1)
+
+        # Calculate the maximum valid filling area within boundaries
+        end_y = min(y + patch.shape[0], full_image.shape[0])
+        end_x = min(x + patch.shape[1], full_image.shape[1])
+
+        # Crop the patch according to the valid filling area
+        cropped_patch = patch[:end_y - y, :end_x - x]
+
+        # Fill the cropped patch into full_image
+        full_image[y:end_y, x:end_x] = cropped_patch
+
+
     return full_image
+
+
 
 def generate_grayscale_negative(image_path, output_path):
     img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
@@ -92,13 +115,15 @@ def main():
         os.makedirs(new_dir, exist_ok=True)
         processed_dir = process_images_in_directory(image_dir, new_dir, img_type)
 
+    photo_size = 2048  # 每块图像大小
+    photo_step = 2000  # 切割步长
     # Step 1: Split the image into patches
     for filename in os.listdir(image_dir):
         image_path = os.path.join(image_dir, filename)
         image = cv2.imread(image_path)
 
-        if image.shape[0] > 2000 or image.shape[1] > 2000:
-            patches, original_size = split_image(image)
+        if image.shape[0] > 2048 and image.shape[1] > 2048:
+            patches, original_size, act_step = split_image(image, photo_size, photo_step)
 
             # Save patches temporarily
             patch_output_dir = os.path.join(output_path, 'patches', os.path.splitext(filename)[0])
@@ -112,7 +137,7 @@ def main():
             for m in methods:
                 if m in ['cellprofier']:
                     cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
-                        __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type)
+                         __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type)
                     print(cmd)
                     os.system(cmd)
                     t = time.time() - start
@@ -130,15 +155,21 @@ def main():
                 t = time.time() - start
                 print(f'{m} ran for a total of {t} s')
 
-                # Step 3: After segmentation, stitch the processed patches back into the full image
+                # # Step 3: After segmentation, stitch the processed patches back into the full image
                 processed_patches = []
                 for idx, (patch, (y, x)) in enumerate(patches):
-                    processed_patch = cv2.imread(os.path.join(method_output_dir, f'patch_{y}_{x}.tif'))
+                    if m == 'MEDIAR':
+                        processed_patch = Image.open(os.path.join(method_output_dir, f'patch_{y}_{x}.tif'))
+                        processed_patch = np.array(processed_patch)
+                    else:
+                        processed_patch = cv2.imread(os.path.join(method_output_dir, f'patch_{y}_{x}.tif'))
+                    
                     processed_patches.append((processed_patch, (y, x)))
 
-                stitched_result = stitch_patches(processed_patches, original_size)
+                stitched_result = stitch_patches(processed_patches, original_size, act_step)
                 final_result_path = os.path.join(output_path, m, filename)
                 os.makedirs(os.path.dirname(final_result_path), exist_ok=True)
+                cv2.imwrite(final_result_path, stitched_result)
                 cv2.imwrite(final_result_path, stitched_result)
                 print(f'{m} result for {filename} saved to {final_result_path}')
 
