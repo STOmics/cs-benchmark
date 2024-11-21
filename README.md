@@ -53,7 +53,7 @@ python cell_seg.py -i your_inputpath -o your_outputpath -m  cellpose3 sam -t ss 
 -t is the image type (ss/he/dapi/mif)  
 -g is the GPU index (True/False or num)  
 #### Segmentation evaluation
-- Ensure that the images in the gt folder have filenames with "**_mask**" and the images in the algorithm output mask folder have filenames with "**_img**", with only this difference in their names.   
+- Ensure that the images in the gt folder have filenames with "**-mask**" and the images in the algorithm output mask folder have filenames with "**-img**", with only this difference in their names.   
   
 - Modify the parameters in the following command and input it into the command line:
 ```
