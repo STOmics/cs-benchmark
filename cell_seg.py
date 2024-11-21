@@ -45,27 +45,24 @@ def split_image(image, photo_size=2000, photo_step=1000):
 
 def stitch_patches(patches, image_size, act_step, max_size=2000):
     if len(patches[0][0].shape) == 3:
-        full_image = np.zeros((image_size[0], image_size[1], 3), dtype=np.uint8)
+        full_image = np.zeros((image_size[0] + 2 * act_step, image_size[1] + 2 * act_step, 3), dtype=np.uint8)
     else:
-        full_image = np.zeros(image_size, dtype=np.uint8)
+        full_image = np.zeros((image_size[0] + 2 * act_step, image_size[1] + 2 * act_step), dtype=np.uint8)
 
     for patch, (y, x) in patches:
-        # If full_image is 3-channel and patch is single-channel, expand patch to 3 channels
-        if full_image.ndim == 3 and patch.ndim == 2:
-            patch = np.stack([patch] * 3, axis=-1)
+        # Adjust the patch to fit within the maximum size, if necessary
+        patch = patch[:max_size, :max_size]
 
-        # Calculate the maximum valid filling area within boundaries
+        # Stitch the patch into the full image
         end_y = min(y + patch.shape[0], full_image.shape[0])
         end_x = min(x + patch.shape[1], full_image.shape[1])
-
-        # Crop the patch according to the valid filling area
         cropped_patch = patch[:end_y - y, :end_x - x]
+        full_image[y:y + cropped_patch.shape[0], x:x + cropped_patch.shape[1]] = cropped_patch
 
-        # Fill the cropped patch into full_image
-        full_image[y:end_y, x:end_x] = cropped_patch
-
-
+    # Remove the padding region
+    full_image = full_image[act_step:-act_step, act_step:-act_step]
     return full_image
+
 
 
 
