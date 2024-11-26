@@ -36,8 +36,7 @@ After downloading the model file, place it in the **src/methods/models** directo
 
 ## Tutorials
 ### Data
-[Data download link](https://bgipan.genomics.cn/#/link/v2dKKUZf8M3YFpGWvB5g)  
-Contact fanjinghong@genomics.cn or shican@genomics.cn to obtain the password.  
+[Data download link](https://db.cngb.org/search/project/CNP0006370/)  
 ![figure1](docs/figure1.png)
 ### Use via command line
 #### Cell segmentation
