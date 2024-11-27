@@ -9,13 +9,13 @@ from math import ceil
 
 work_path = os.path.abspath('.')
 __py__ = {
-    'MEDIAR': '/media/Data/shican/software/miniconda3/envs/MEDIAR/bin/python',
+    'MEDIAR': 'miniconda3/envs/MEDIAR/bin/python',
     'cellpose': 'python',
     'cellpose3': 'python',
     'deepcell': 'python',
     'sam': 'python',
     'stardist': 'python',
-    'cellprofiler': '/media/Data/shican/software/miniconda3/envs/cp4/bin/python'
+    'cellprofiler': 'miniconda3/envs/cp4/bin/python'
 }
 __methods__ = ['MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'cellprofiler']
 
@@ -112,8 +112,8 @@ def main():
         os.makedirs(new_dir, exist_ok=True)
         processed_dir = process_images_in_directory(image_dir, new_dir, img_type)
 
-    photo_size = 2048  # 每块图像大小
-    photo_step = 2000  # 切割步长
+    photo_size = 2048  # Patch size
+    photo_step = 2000  # Cutting step size
     # Step 1: Split the image into patches
     for filename in os.listdir(image_dir):
         image_path = os.path.join(image_dir, filename)
@@ -190,6 +190,7 @@ def main():
                 t = time.time() - start
                 print(f'{m} ran for a total of {t} s')
                 print(f'{m} result saved to {os.path.join(output_path, m)}')
+            break
 
 if __name__ == '__main__':
     main()
