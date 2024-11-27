@@ -23,7 +23,7 @@ pip install -r requirements.txt
 pip install git+https://github.com/facebookresearch/segment-anything.git
 ```
 
-- Use the following command to install the environment for **mediar** and **cellprofiler**, and add the path in the **\_py_** section of cellsegmentation_benchmark.ipynb or cell_seg.py
+- Use the following command to install the environment for **mediar** and **cellprofiler**, and add the conda path in the **\_py_** section of **cell_seg.py** or **cellsegmentation_benchmark.ipynb** 
 ```
 conda env create -f src/methods/MEDIAR/environment.yaml
 conda env create -f src/methods/cellprofiler/environment.yaml
