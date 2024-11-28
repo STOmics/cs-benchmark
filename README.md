@@ -15,6 +15,7 @@ git clone https://github.com/STOmics/cs-benchmark.git
 cd cs-benchmark 
 ```
 - Create an environment for Cellpose, SAM, StarDist, and DeepCell.
+- **NOTE**：The command does not include installing **PyTorch**. If you need to use **GPU**, please install the corresponding version of **PyTorch**.
 ```
 # python3.8 in conda env
 conda create --name=cs-benchmark python=3.8
