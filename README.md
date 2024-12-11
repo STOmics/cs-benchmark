@@ -1,4 +1,4 @@
-# benchmark
+# A Large-Scale Multimodal Annotated Dataset for Cell Segmentation with Benchmarking of Universal Models
 
 ## Introduction
 
@@ -37,7 +37,8 @@ After downloading the model file, place it in the **src/methods/models** directo
 
 ## Tutorials
 ### Data
-[Data download link](https://db.cngb.org/search/project/CNP0006370/)  
+[zenodo download link](https://zenodo.org/records/14312044)  
+[CNSA download link](https://db.cngb.org/search/project/CNP0006370/)  
 ![figure1](docs/figure1.png)
 ### Use via command line
 #### Cell segmentation
@@ -68,9 +69,10 @@ python src/eval/cell_eval_multi.py -g gt_path -d dt_path -o result_path
 ### Use via Notebook
 [cellsegmentation_benchmark.ipynb](https://github.com/STOmics/cs-benchmark/blob/main/tutorial/cellsegmentation_benchmark.ipynb)
 
-## License and Citation
-
-
+## Citation
+if you use **CellBinDB** in your work, please cite it  
+> Shi C, Fan J, Deng Z, et al. CellBinDB: A Large-Scale Multimodal Annotated Dataset for Cell Segmentation with Benchmarking of Universal Models[J]. bioRxiv, 2024: 2024.11. 20.619750.  
+> doi: https://doi.org/10.1101/2024.11.20.619750
 ## Reference
 > [cellpose](https://github.com/MouseLand/cellpose)  
 > [cellpose3](https://github.com/MouseLand/cellpose)  
