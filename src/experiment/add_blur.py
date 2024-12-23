@@ -5,9 +5,9 @@ import pandas as pd
 
 # Set the input and output directories
 input_dir = 'D:/dataset/ssDNA/input/'
-gaussian_blur_output_dir_1 = 'D:/dataset/ssDNA/gaussian_blur_output_1/'  # 弱高斯模糊
-gaussian_blur_output_dir_2 = 'D:/dataset/ssDNA/gaussian_blur_output_2/'  # 中高斯模糊
-gaussian_blur_output_dir_3 = 'D:/dataset/ssDNA/gaussian_blur_output_3/'  # 强高斯模糊
+gaussian_blur_output_dir_1 = 'D:/dataset/ssDNA/gaussian_blur_output_1/'  # weak Gaussian blur
+gaussian_blur_output_dir_2 = 'D:/dataset/ssDNA/gaussian_blur_output_2/'  # medium 
+gaussian_blur_output_dir_3 = 'D:/dataset/ssDNA/gaussian_blur_output_3/'  # strong
 sobel_output_dir = 'D:/dataset/ssDNA/sobel_output/'
 csv_file_path = os.path.join('D:/dataset/ssDNA', 'image_gradients.csv')
 

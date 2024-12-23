@@ -20,10 +20,8 @@ def MEDIAR_method(para, args):
     input_path = para.image_path
     output_path = para.output
 
-    model_path1 = "../../models/from_phase1.pth"
-    model_path2 = "../../models/from_phase2.pth"
-    weights1 = torch.load(model_path1, map_location="cpu")
-    weights2 = torch.load(model_path2, map_location="cpu")
+    model_path = "../../models/from_phase2.pth"
+    weights = torch.load(model_path, map_location="cpu")
 
     model_args = {
     "classes": 3,
@@ -33,13 +31,10 @@ def MEDIAR_method(para, args):
     "in_channels": 3
     }
     device = (args.is_gpu == True) and "cuda:0" or "cpu"
-    model1 = MEDIARFormer(**model_args)
-    model1.load_state_dict(weights1, strict=False)
+    model = MEDIARFormer(**model_args)
+    model.load_state_dict(weights, strict=False)
     
-    model2 = MEDIARFormer(**model_args)
-    model2.load_state_dict(weights2, strict=False)
-    
-    predictor = Predictor(model2, device, input_path, output_path, algo_params={"use_tta": True})
+    predictor = Predictor(model, device, input_path, output_path, algo_params={"use_tta": True})
     _ = predictor.conduct_prediction()
     
     old_string = '_label.tiff'
