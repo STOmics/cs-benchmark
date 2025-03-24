@@ -234,7 +234,7 @@ def main(args, para):
     import numpy as np
 
     # stains = ("HE", "ssDNA", "FB", "mIF")
-    index = ('Precision', 'Recall', "F1",'jaccrd','dice')
+    index = ('Precision', 'Recall', "F1",'jaccrd','dice','PQ')
     
 
     fig, axs = plt.subplots(figsize=(16, 12))
@@ -257,8 +257,8 @@ def main(args, para):
         'sam': '#8c564b',
         'stardist': '#9467bd',
         'deepcell': '#17becf',
-        'v3': '#bcbd22',
-        'lt': '#e377c2',
+        'cellbin2': '#bcbd22',
+        'finetuning': '#e377c2',
         'cellpose2': '#7f7f7f'
     }
 
@@ -271,8 +271,8 @@ def main(args, para):
         'sam', 
         'stardist', 
         'deepcell', 
-        'v3', 
-        'lt', 
+        'cellbin2', 
+        'finetuning', 
         'cellpose2'
     ]
 

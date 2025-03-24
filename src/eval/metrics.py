@@ -707,9 +707,37 @@ class ObjectMetrics(BaseMetrics):
     def __repr__(self):
         """Format the calculated statistics as a ``pd.DataFrame``."""
         return json.dumps(self.to_dict())
+    
+    def compute_pq(self, iou_threshold=0.5):
+        """
+        根据计算好的 IoU 矩阵计算 Panoptic Quality (PQ) 以及
+        Segmentation Quality (SQ) 和 Recognition Quality (RQ)。
+        """
+        tp_sum_iou = 0.0
+        tp = 0
 
+        for detection in self._correct:
+            true_idx = detection.true_index[0] if isinstance(detection.true_index, tuple) else detection.true_index
+            pred_idx = detection.pred_index[0] if isinstance(detection.pred_index, tuple) else detection.pred_index
+
+            iou_value = self.iou[true_idx - 1, pred_idx - 1]
+
+            if iou_value >= iou_threshold:
+                tp += 1
+                tp_sum_iou += iou_value
+        sq = tp_sum_iou / tp if tp > 0 else 0.0
+        #tp = self.correct_detections
+        #fp = self.n_pred - tp
+        #fn = self.n_true - tp
+        denominator = tp + 0.5 * self.gained_detections + 0.5 * self.missed_detections
+        rq = tp / denominator if denominator > 0 else 0.0
+        pq = sq * rq
+        
+        return pq,sq,rq
+    
     def to_dict(self):
         """Return a dictionary representation of the calclulated metrics."""
+        pq, sq, rq = self.compute_pq(iou_threshold=0.5)
         return {
             'n_pred': self.n_pred,
             'n_true': self.n_true,
@@ -729,6 +757,7 @@ class ObjectMetrics(BaseMetrics):
             'seg': self.seg_score,
             'jaccard': self.jaccard,
             'dice': self.dice,
+            'PQ':pq,
         }
 
     @property
