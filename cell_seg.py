@@ -1,23 +1,24 @@
 import os 
+import numpy as np
 import time
 import argparse
 import cv2
 import sys
-import numpy as np
 from PIL import Image
 from math import ceil
 
 work_path = os.path.abspath('.')
 __py__ = {
-    'MEDIAR': 'miniconda3/envs/MEDIAR/bin/python',
-    'cellpose': 'python',
-    'cellpose3': 'python',
+    'MEDIAR': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/MEDIAR/bin/python',
+    'cellpose': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose/bin/python',
+    'cellpose3': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose3/bin/python',
     'deepcell': 'python',
     'sam': 'python',
     'stardist': 'python',
-    'cellprofiler': 'miniconda3/envs/cp4/bin/python'
+    'cellprofiler': 'miniconda3/envs/cp4/bin/python',
+    'hovernet':'/storeData/USER/software/shican/Anaconda3/envs/hovernet/bin/python'
 }
-__methods__ = ['MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'cellprofiler']
+__methods__ = ['MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'cellprofiler','hovernet']
 
 __script__ = {
     'MEDIAR': os.path.join(work_path, 'src/methods/MEDIAR/mediar_main.py'),
@@ -26,7 +27,8 @@ __script__ = {
     'deepcell': os.path.join(work_path, 'src/methods/deepcell_main.py'),
     'sam': os.path.join(work_path, 'src/methods/sam_main.py'),
     'stardist': os.path.join(work_path, 'src/methods/stardist_main.py'),
-    'cellprofiler': os.path.join(work_path, 'src/methods/cellprofiler/cellprofiler_main.py')
+    'cellprofiler': os.path.join(work_path, 'src/methods/cellprofiler/cellprofiler_main.py'),
+    'hovernet':os.path.join(work_path,'src/methods/hover_net/hovernet_main.py')
 }
 
 def split_image(image, photo_size=2000, photo_step=1000):
