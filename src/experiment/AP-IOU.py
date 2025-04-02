@@ -35,17 +35,30 @@ for iou in iou_thresholds:
             data[algorithm_name][iou] = avg_precision  # 存储每个算法在不同 IOU 阈值下的准确率
 
 # 绘制 IOU 阈值和准确率的曲线，添加固定点 (0, 1) 和 (1, 0)
+order = ['cellprofiler', 'MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'hovernet']
+colors = {
+    'cellprofiler': '#ff7f0e',
+    'MEDIAR': '#d62728',
+    'cellpose': '#1f77b4',
+    'cellpose3': '#2ca02c',
+    'sam': '#8c564b',
+    'stardist': '#9467bd',
+    'deepcell': '#17becf',
+    'hovernet': '#e377c2',
+}
+
 plt.figure(figsize=(8, 6))
-for algo, metrics in data.items():
-    sorted_data = sorted(metrics.items(), key=lambda x: x[0])
-    iou_values = [0] + [x[0] for x in sorted_data] + [1]
-    precisions = [1] + [x[1] for x in sorted_data] + [0]  # (0, 1) 和 (1, 0)
+for algo in order:
+    if algo in data:
+        sorted_data = sorted(data[algo].items(), key=lambda x: x[0])
+        iou_values = [0] + [x[0] for x in sorted_data] + [1]
+        precisions = [1] + [x[1] for x in sorted_data] + [0]
+        plt.plot(iou_values, precisions, marker='o', label=algo, color=colors[algo])
 
-    plt.plot(iou_values, precisions, marker='o', label=algo)
-
-plt.xlabel("IOU 阈值")
-plt.ylabel("准确率（Precision）")
-plt.title("准确率与 IOU 阈值的关系曲线")
+plt.xlabel("IoU matching threshold")
+plt.ylabel("Average precision")
+plt.title("ssDNA")
 plt.legend()
 plt.grid(True)
+plt.savefig("ssDNA.svg", format="svg", dpi=600)
 plt.show()
