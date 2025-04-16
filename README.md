@@ -1,4 +1,4 @@
-# A Large-Scale Multimodal Annotated Dataset for Cell Segmentation with Benchmarking of Universal Models
+# CellBinDB: A Large-Scale Multimodal Annotated Dataset for Cell Segmentation with Benchmarking of Universal Models
 
 ## Introduction
 
@@ -33,6 +33,7 @@ conda env create -f src/methods/cellprofiler/environment.yaml
 
     [sam_vit_b_01ec64.pth](https://dl.fbaipublicfiles.com/segment_anything/sam_vit_b_01ec64.pth)  
 [MEDIAR](https://drive.google.com/drive/folders/1eZLGuQkxF5ouBgTA2UuH0beLcm635ADS)  
+[Hovernet](https://drive.google.com/file/d/1NUnO4oQRGL-b0fyzlT8LKZzo6KJD0_6X/view)  
 After downloading the model file, place it in the **src/methods/models** directory of the project.
 
 ## Tutorials
