@@ -28,6 +28,7 @@ pip install git+https://github.com/facebookresearch/segment-anything.git
 ```
 conda env create -f src/methods/MEDIAR/environment.yaml
 conda env create -f src/methods/cellprofiler/environment.yaml
+conda env create -f src/methods/hover_net/environment.yaml
 ```
 - Download the necessary model file
 
