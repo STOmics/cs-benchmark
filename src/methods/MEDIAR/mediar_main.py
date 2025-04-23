@@ -20,7 +20,8 @@ def MEDIAR_method(para, args):
     input_path = para.image_path
     output_path = para.output
 
-    model_path = "../../models/from_phase2.pth"
+    model_path = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/models/from_phase2.pth"
+    #model_path = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/models/MEDIAR_finetuning.pth"
     weights = torch.load(model_path, map_location="cpu")
 
     model_args = {
@@ -30,7 +31,7 @@ def MEDIAR_method(para, args):
     "encoder_name": 'mit_b5',
     "in_channels": 3
     }
-    device = (args.is_gpu == True) and "cuda:0" or "cpu"
+    device = (para.is_gpu == True) and "cuda:0" or "cpu"
     model = MEDIARFormer(**model_args)
     model.load_state_dict(weights, strict=False)
     
@@ -42,6 +43,15 @@ def MEDIAR_method(para, args):
         if old_string in filename:
             new_filename = filename.replace(old_string, '.tif')
             os.rename(os.path.join(output_path, filename), os.path.join(output_path, new_filename))
+    for filename in os.listdir(output_path):
+        if filename.endswith(".tif"):
+            file_path = os.path.join(output_path, filename)
+            masks = tifffile.imread(file_path)
+
+            semantics = instance2semantics(masks)
+            semantics[semantics > 0] = 255
+
+            tifffile.imwrite(file_path, semantics.astype(np.uint8))
 
 USAGE = 'MEDIAR'
 PROG_VERSION = 'v0.0.1'
