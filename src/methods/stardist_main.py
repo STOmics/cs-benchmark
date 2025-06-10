@@ -206,23 +206,21 @@ def run(file_lst, out_path,img_type):
         model = StarDist2D.from_pretrained('2D_demo')
 
     for i,file in enumerate(tqdm(file_lst, desc='stardist')):
-        try:
-            name = os.path.split(file)[-1]
-            if os.path.exists(os.path.join(out_path, name)):
-                continue
-            img = tifffile.imread(file)
-            #img = cv2.imread(file)
-            if img_type.lower() != 'he':
-                img = f_ij_16_to_8(img, chunk_size=1000000)
-                if img.ndim == 3:
-                    #img = f_rgb2gray(img, True)
-                    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            img = pre(img)
-            mask = stardist_seg(img, model)
-            mask[mask > 0] = 255
-            tifffile.imwrite(os.path.join(out_path, name), mask, compression='zlib')
-        except:
-            traceback.print_exc()
+        name = os.path.split(file)[-1]
+        if os.path.exists(os.path.join(out_path, name)):
+            continue
+        img = tifffile.imread(file)
+        #img = cv2.imread(file)
+        if img_type.lower() != 'he':
+            img = f_ij_16_to_8(img, chunk_size=1000000)
+            if img.ndim == 3:
+                #img = f_rgb2gray(img, True)
+                img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        img = pre(img)
+        mask = stardist_seg(img, model)
+        mask[mask > 0] = 255
+        tifffile.imwrite(os.path.join(out_path, name), mask, compression='zlib')
+      
 
 
 if __name__ == '__main__':
@@ -239,7 +237,7 @@ if __name__ == '__main__':
     img_type = args.img_type
     gpu = args.gpu
     if gpu == True:
-        gpu = 0
+        gpu = 1
     os.environ["CUDA_VISIBLE_DEVICES"] = gpu
 
     file_lst = []

@@ -45,6 +45,7 @@ from metrics import Metrics
 import argparse
 import pandas as pd
 import subprocess
+import matplotlib.cm as cm
 
 # Constants
 work_path = os.path.abspath('.')
@@ -156,8 +157,11 @@ class CellSegEval(object):
         else:
             self._dt_list = search_files(dt_path, ['.tif', '.png', '.jpg'])
         self._gt_list = [imgpath for imgpath in self._dt_list if imgpath.replace('mask', 'img').replace(gt_path, dt_path) in self._dt_list]  # 只读取 DT 中有的 GT 对应的图片
+        #self._dt_list = [imgpath.replace('mask', 'img').replace(gt_path, dt_path) for imgpath in self._gt_list if imgpath.replace('mask', 'img').replace(gt_path, dt_path) in self._dt_list]  #只读取 GT中 有的DT
+
         assert len(self._gt_list) == len(self._dt_list), 'Length of list GT {} are not equal to DT {}'.format(len(self._gt_list), len(self._dt_list))
 
+        print('dt_list:',self._dt_list)
         gt_arr = list()
         dt_arr = list()
         shape_list = list()
@@ -183,7 +187,7 @@ class CellSegEval(object):
         self._object_metrics = object_metrics.drop(
             labels=['jaccard','missed_det_from_merge', 'gained_det_from_split', 
                     'true_det_in_catastrophe', 'pred_det_in_catastrophe', 'merge', 'split', 
-                    'catastrophe', 'seg', 'n_pred', 'n_true', 'correct_detections', 'missed_detections'], 
+                    'catastrophe', 'seg', 'n_pred', 'n_true', 'correct_detections', 'missed_detections','PQ'], 
             axis=1)
         self._object_metrics.index = [os.path.basename(d) for d in self._dt_list]
         models_logger.info('For each piece of data in the test set, the evaluation results are as follows:')
@@ -245,36 +249,45 @@ def main(args, para):
         matplotlib.use('Agg')
         import matplotlib.pyplot as plt
         import numpy as np
-        index = ('Precision', 'Recall', "F1",  'dice', 'PQ')
+        index = ('Precision', 'Recall', "F1",  'dice')
         fig, axs = plt.subplots(figsize=(16, 12))
         x = np.arange(len(index))  # 标签位置
         width = 0.1  # 每个条形图宽度
         multiplier = 0
         
         colors = {
-            'cellprofiler': '#ff7f0e', 
+            'mediar_mamba_24layer': '#ff7f0e', 
             'MEDIAR': '#d62728',
             'cellpose': '#1f77b4', 
             'cellpose3': '#2ca02c',
             'sam': '#8c564b',
             'stardist': '#9467bd',
             'deepcell': '#17becf',
-            'cellbin2': '#bcbd22',
-            'hovernet': '#e377c2',
-            'cyto3_train_at_cellbinDB': '#7f7f7f'
+            'CellBin': '#bcbd22',
+            'mediar_mamba_epoch150': '#e377c2',
+            'mediar_mamba': '#7f7f7f'
         }
         order = [
-            'cellprofiler', 
+            'mediar_mamba_24layer', 
             'MEDIAR', 
             'cellpose', 
             'cellpose3', 
             'sam', 
             'stardist', 
             'deepcell', 
-            'cellbin2', 
-            'hovernet', 
-            'cyto3_train_at_cellbinDB'
+            'CellBin', 
+            'mediar_mamba_epoch150', 
+            'mediar_mamba'
         ]
+
+        # 找出未在 order 中的新方法
+        extra_methods = [k for k in dataset_dct.keys() if k not in order]
+        # 为新方法分配颜色（使用 tab20 colormap）
+        extra_cmap = cm.get_cmap('tab20', len(extra_methods))
+        for i, method in enumerate(extra_methods):
+            colors[method] = extra_cmap(i)
+        order += extra_methods  # 把新方法添加到顺序中
+
         # 对结果按照指定顺序排序
         order_means = OrderedDict((key, dataset_dct[key]) for key in order if key in dataset_dct)
         for key in dataset_dct:

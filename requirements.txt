@@ -1,4 +1,3 @@
-deepcell==0.12.10
 cellpose==3.0.11
 stardist==0.9.1
 six==1.16.0

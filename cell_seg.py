@@ -12,13 +12,14 @@ __py__ = {
     'MEDIAR': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/MEDIAR/bin/python',
     'cellpose': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose/bin/python',
     'cellpose3': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose3/bin/python',
-    'deepcell': 'python',
-    'sam': 'python',
+    'deepcell': '/storeData/USER/data/01.CellBin/00.user/shican/00.software/Miniconda3/envs/cellpose/bin/python',
+    'sam': '/storeData/USER/software/shican/Anaconda3/envs/cellpose/bin/python',
     'stardist': 'python',
     'cellprofiler': 'miniconda3/envs/cp4/bin/python',
-    'hovernet':'/storeData/USER/software/shican/Anaconda3/envs/hovernet/bin/python'
+    'hovernet':'/storeData/USER/software/shican/Anaconda3/envs/hovernet/bin/python',
+    'cellpose4':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose4/bin/python'
 }
-__methods__ = ['MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'cellprofiler','hovernet']
+__methods__ = ['MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'cellprofiler','hovernet','cellpose4']
 
 __script__ = {
     'MEDIAR': os.path.join(work_path, 'src/methods/MEDIAR/mediar_main.py'),
@@ -28,7 +29,8 @@ __script__ = {
     'sam': os.path.join(work_path, 'src/methods/sam_main.py'),
     'stardist': os.path.join(work_path, 'src/methods/stardist_main.py'),
     'cellprofiler': os.path.join(work_path, 'src/methods/cellprofiler/cellprofiler_main.py'),
-    'hovernet':os.path.join(work_path,'src/methods/hover_net/hovernet_main.py')
+    'hovernet':os.path.join(work_path,'src/methods/hover_net/hovernet_main.py'),
+    'cellpose4':os.path.join(work_path,'src/methods/cellpose4_main.py'),
 }
 
 def split_image(image, photo_size=2000, photo_step=1000):
@@ -45,11 +47,8 @@ def split_image(image, photo_size=2000, photo_step=1000):
     
     return patches, (height, width), act_step
 
-def stitch_patches(patches, image_size, act_step, max_size=2000):
-    if len(patches[0][0].shape) == 3:
-        full_image = np.zeros((image_size[0] + 2 * act_step, image_size[1] + 2 * act_step, 3), dtype=np.uint8)
-    else:
-        full_image = np.zeros((image_size[0] + 2 * act_step, image_size[1] + 2 * act_step), dtype=np.uint8)
+def stitch_patches(patches, image_size, act_step, max_size=4048):
+    full_image = np.zeros((image_size[0] + 2 * act_step, image_size[1] + 2 * act_step), dtype=np.uint8)
 
     for patch, (y, x) in patches:
         # Adjust the patch to fit within the maximum size, if necessary
@@ -64,8 +63,6 @@ def stitch_patches(patches, image_size, act_step, max_size=2000):
     # Remove the padding region
     full_image = full_image[act_step:-act_step, act_step:-act_step]
     return full_image
-
-
 
 
 def generate_grayscale_negative(image_path, output_path):
@@ -114,14 +111,14 @@ def main():
         os.makedirs(new_dir, exist_ok=True)
         processed_dir = process_images_in_directory(image_dir, new_dir, img_type)
 
-    photo_size = 2048  # Patch size
-    photo_step = 2000  # Cutting step size
+    photo_size = 4048  # Patch size
+    photo_step = 4000  # Cutting step size
     # Step 1: Split the image into patches
     for filename in os.listdir(image_dir):
         image_path = os.path.join(image_dir, filename)
         image = cv2.imread(image_path)
 
-        if image.shape[0] > 2048 and image.shape[1] > 2048:
+        if image.shape[0] > 5000 and image.shape[1] > 5000:
             patches, original_size, act_step = split_image(image, photo_size, photo_step)
 
             # Save patches temporarily
@@ -157,20 +154,34 @@ def main():
                 # # Step 3: After segmentation, stitch the processed patches back into the full image
                 processed_patches = []
                 for idx, (patch, (y, x)) in enumerate(patches):
-                    if m == 'MEDIAR':
-                        processed_patch = Image.open(os.path.join(method_output_dir, f'patch_{y}_{x}.tif'))
-                        processed_patch = np.array(processed_patch)
-                    else:
-                        processed_patch = cv2.imread(os.path.join(method_output_dir, f'patch_{y}_{x}.tif'))
-                    
-                    processed_patches.append((processed_patch, (y, x)))
+                    patch_filename = f'patch_{y}_{x}.tif'
+                    patch_path = os.path.join(method_output_dir, patch_filename)
 
+                    if os.path.exists(patch_path):
+                        if m == 'MEDIAR':
+                            img = Image.open(patch_path).convert('L')  # 强制灰度
+                            processed_patch = np.array(img)
+                        else:
+                            img = cv2.imread(patch_path)
+                            if img is not None and img.ndim == 3:
+                                processed_patch = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 强制灰度
+                            else:
+                                processed_patch = img  # 已是灰度图
+                    else:
+                        h, w = patch.shape[:2]
+                        processed_patch = np.zeros((h, w), dtype=np.uint8)
+                        print(f"Warning: Missing patch {patch_filename}, replaced with black patch.")
+
+                    processed_patches.append((processed_patch, (y, x)))
+                # 拼接图像
                 stitched_result = stitch_patches(processed_patches, original_size, act_step)
+
+                # 保存最终图像
                 final_result_path = os.path.join(output_path, m, filename)
                 os.makedirs(os.path.dirname(final_result_path), exist_ok=True)
                 cv2.imwrite(final_result_path, stitched_result)
-                cv2.imwrite(final_result_path, stitched_result)
-                print(f'{m} result for {filename} saved to {final_result_path}')
+                print(f"[Info] {m} result for {filename} saved to: {final_result_path}")
+
 
         else:
             for m in methods:

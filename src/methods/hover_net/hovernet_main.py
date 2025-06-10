@@ -83,7 +83,7 @@ def convert_custom_args():
     parser.add_argument("-g", "--gpu", help="The GPU index", default="0")
     # 这里还可以添加其他参数，比如 model_path 等，或者在转换时使用预设默认值
     custom_args = parser.parse_args()
-
+    
     # 这里默认选用 tile 模式（实际情况可以根据需要扩展）
     sub_cmd = 'tile'
   
@@ -92,7 +92,7 @@ def convert_custom_args():
         '--gpu': custom_args.gpu,
         '--nr_types': '0',            # 如有需要，可改为其他默认值或增加命令行选项
         '--type_info_path': '',
-        '--model_path': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/models/hovernet_original_consep_notype_tf2pytorch.tar',
+        '--model_path': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/models/hovernet_original_kumar_notype_tf2pytorch.tar',
         '--model_mode': 'original',       # 根据实际情况选择 fast 或 original
         '--nr_inference_workers': '8',
         '--nr_post_proc_workers': '16',
@@ -110,6 +110,8 @@ def convert_custom_args():
         '--output_dir', custom_args.output,
         '--mem_usage', '0.2'
     ]
+    if not os.path.exists(custom_args.output):
+            os.makedirs(custom_args.output)
     # 组合全局参数和子命令参数，构造新的 sys.argv 列表
     new_argv = [sys.argv[0]] + global_args_list + sub_args_list
     sys.argv = new_argv

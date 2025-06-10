@@ -40,8 +40,7 @@ from skimage import color
 
 import convert_format
 from . import base
-
-
+from PIL import Image
 ####
 def _prepare_patching(img, window_size, mask_size, return_src_top_corner=False):
     """Prepare patch information for tile processing.
@@ -163,7 +162,7 @@ class InferManager(base.InferManager):
         
         #rm_n_mkdir(self.output_dir + '/json/')
         #rm_n_mkdir(self.output_dir + '/mat/')
-        #rm_n_mkdir(self.output_dir + '/overlay/')
+        rm_n_mkdir(self.output_dir + '/overlay/')
         if self.save_qupath:
             rm_n_mkdir(self.output_dir + "/qupath/")
 
@@ -197,6 +196,9 @@ class InferManager(base.InferManager):
 
             save_path = "%s/%s.tif" % (self.output_dir, img_name)
             cv2.imwrite(save_path, pred_inst)
+            save_path = "%s/overlay/%s.tif" % (self.output_dir, img_name)
+            image_pil = Image.fromarray(overlaid_img)
+            image_pil.save(save_path)
 
             if self.save_qupath:
                 nuc_val_list = list(inst_info_dict.values())

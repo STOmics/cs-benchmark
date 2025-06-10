@@ -1,10 +1,10 @@
 # RUN CELLPOSE
 import os
-import glob
-from cellpose import models, io
 import tifffile
 import argparse
+from cellpose import models, io
 import tqdm
+
 import logging
 import cv2
 models_logger = logging.getLogger(__name__)
@@ -19,20 +19,22 @@ def get_image_size(image_path):
 def cellpose_method(para, args):
     input_path = para.image_path
     output_path = para.output
+    gpu = para.is_gpu
     if os.path.isdir(input_path):
         imgs = cell_dataset(input_path, ['.tif', '.jpg', '.png'])
     else: imgs = [para.image_path]
     img_type = para.img_type
 
     model = models.Cellpose(gpu=True, model_type='cyto')
-
+    #model = models.CellposeModel(gpu=gpu, model_type='/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/models/cyto_train_on_cellbinDB')
     chan = [0, 0]
 
     # or in a loop
     for i in tqdm.tqdm(range(len(imgs)), 'Cellpose'):
         filename = imgs[i]
         img = io.imread(filename)
-        masks, flows, styles, diams  = model.eval(img, diameter=None, channels=chan)
+        masks, flows, styles, diams  = model.eval(img, diameter=None, channels=chan) # cyto
+        #masks, flows, styles  = model.eval(img, diameter=None, channels=chan) # finetuning model
         semantics = instance2semantics(masks)
         semantics[semantics > 0] = 255
         if not os.path.exists(output_path):

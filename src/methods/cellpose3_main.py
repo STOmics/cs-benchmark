@@ -1,6 +1,7 @@
 # RUN CELLPOSE
 import os
 import glob
+import numpy as np
 from cellpose import models, io,denoise
 import tifffile
 import argparse
@@ -21,17 +22,22 @@ def cellpose_method(para, args):
     else: imgs = [para.image_path]
     img_type = para.img_type
     model = models.Cellpose(gpu=True, model_type='cyto3')
+    # #model = denoise.CellposeDenoiseModel(gpu=True, model_type="cyto3",
+    #                                    restore_type="denoise_cyto3")
+    #model = models.CellposeModel(gpu=True, model_type='/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/models/cyto3_train_on_cellbinDB')
     chan = [0, 0]
     for i in tqdm.tqdm(range(len(imgs)), 'Cellpose3'):
         filename = imgs[i]
         img = io.imread(filename)
         masks, flows, styles, diams = model.eval(img, diameter=None, channels=chan)
+        #masks, flows, styles  = model.eval(img, diameter=None, channels=chan) # finetuning model
         semantics = instance2semantics(masks)
         semantics[semantics > 0] = 255
         if not os.path.exists(output_path):
             os.makedirs(output_path)
         name = os.path.split(filename)[-1]    
         tifffile.imwrite(os.path.join(output_path,name), semantics, compression='zlib')
+        #tifffile.imwrite(os.path.join(output_path,name), masks, compression='zlib')
 
 
 

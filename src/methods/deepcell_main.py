@@ -1,14 +1,12 @@
 import argparse
-import time
-from deepcell.applications import Mesmer
 import numpy as np
 import os
 import tensorflow as tf
-import math
 import cv2
 import tqdm
 import logging
 from utils import cell_dataset, auto_make_dir, instance2semantics,cvtColor,bitwise_not
+from deepcell.applications import Mesmer
 models_logger = logging.getLogger(__name__)
 
 
