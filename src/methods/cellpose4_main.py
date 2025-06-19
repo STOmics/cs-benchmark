@@ -76,8 +76,8 @@ def cellpose4_method(para, args):
 
         # 保存掩膜图像
         name = os.path.basename(f)
+        #tifffile.imwrite(os.path.join(output_path, name), masks.astype(np.uint8), compression='zlib')
         tifffile.imwrite(os.path.join(output_path, name), semantics.astype(np.uint8), compression='zlib')
-
 
 USAGE = 'Cellpose4'
 PROG_VERSION = 'v0.0.1'

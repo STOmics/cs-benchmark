@@ -1,2 +1,157 @@
 nohup: ignoring input
-nohup: failed to run command ‘CUDA_VISIBLE_DEVICES=0’: Permission denied
+Prediction finished: patch_0_0.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 220.17s
+Prediction finished: patch_0_12000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 141.26s
+Prediction finished: patch_0_16000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 137.48s
+Prediction finished: patch_0_20000.tif; img size = torch.Size([1, 3, 4048, 3568]); costing: 112.56s
+Prediction finished: patch_0_4000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 139.11s
+Prediction finished: patch_0_8000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 138.71s
+Prediction finished: patch_12000_0.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 132.65s
+Prediction finished: patch_12000_12000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 138.95s
+Prediction finished: patch_12000_16000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 138.94s
+Prediction finished: patch_12000_20000.tif; img size = torch.Size([1, 3, 4048, 3568]); costing: 115.93s
+Prediction finished: patch_12000_4000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 135.55s
+Prediction finished: patch_12000_8000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 141.09s
+Prediction finished: patch_16000_0.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 134.01s
+Prediction finished: patch_16000_12000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 140.44s
+Prediction finished: patch_16000_16000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 140.28s
+Prediction finished: patch_16000_20000.tif; img size = torch.Size([1, 3, 4048, 3568]); costing: 117.15s
+Prediction finished: patch_16000_4000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 140.47s
+Prediction finished: patch_16000_8000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 139.11s
+Prediction finished: patch_20000_0.tif; img size = torch.Size([1, 3, 3568, 4048]); costing: 117.05s
+Prediction finished: patch_20000_12000.tif; img size = torch.Size([1, 3, 3568, 4048]); costing: 208.13s
+Prediction finished: patch_20000_16000.tif; img size = torch.Size([1, 3, 3568, 4048]); costing: 206.89s
+Prediction finished: patch_20000_20000.tif; img size = torch.Size([1, 3, 3568, 3568]); costing: 123.73s
+Prediction finished: patch_20000_4000.tif; img size = torch.Size([1, 3, 3568, 4048]); costing: 114.44s
+Prediction finished: patch_20000_8000.tif; img size = torch.Size([1, 3, 3568, 4048]); costing: 117.81s
+Prediction finished: patch_4000_0.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 148.68s
+Prediction finished: patch_4000_12000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 138.96s
+Prediction finished: patch_4000_16000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 142.04s
+Prediction finished: patch_4000_20000.tif; img size = torch.Size([1, 3, 4048, 3568]); costing: 115.40s
+Prediction finished: patch_4000_4000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 138.25s
+Prediction finished: patch_4000_8000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 199.85s
+Prediction finished: patch_8000_0.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 329.18s
+Prediction finished: patch_8000_12000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 366.71s
+Prediction finished: patch_8000_16000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 354.76s
+Prediction finished: patch_8000_20000.tif; img size = torch.Size([1, 3, 4048, 3568]); costing: 299.85s
+Prediction finished: patch_8000_4000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 312.22s
+Prediction finished: patch_8000_8000.tif; img size = torch.Size([1, 3, 4048, 4048]); costing: 144.39s
+
+ Total Time Cost: 6082.19s
+2025-06-16 18:58:02.363738: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-06-16 18:58:06.611378: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-06-16 18:58:29.915014: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2025-06-16 18:59:25.098212: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1639] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 11260 MB memory:  -> device: 0, name: Tesla T4, pci bus id: 0000:65:00.0, compute capability: 7.5
+Found model '2D_versatile_he' for 'StarDist2D'.
+Loading network weights from 'weights_best.h5'.
+Loading thresholds from 'thresholds.json'.
+Using default values: prob_thresh=0.692478, nms_thresh=0.3.
+stardist:   0%|          | 0/36 [00:00<?, ?it/s]2025-06-16 18:59:31.946778: I tensorflow/compiler/xla/stream_executor/cuda/cuda_dnn.cc:432] Loaded cuDNN version 8700
+stardist_main.py (177): Mean of empty slice
+stardist:   3%|▎         | 1/36 [00:29<17:08, 29.38s/it]stardist:   6%|▌         | 2/36 [01:02<17:59, 31.76s/it]stardist:   8%|▊         | 3/36 [01:32<16:50, 30.62s/it]stardist:  11%|█         | 4/36 [01:41<11:57, 22.42s/it]stardist:  14%|█▍        | 5/36 [01:51<09:06, 17.61s/it]stardist:  17%|█▋        | 6/36 [02:08<08:51, 17.71s/it]stardist:  19%|█▉        | 7/36 [02:29<09:01, 18.68s/it]stardist:  22%|██▏       | 8/36 [02:40<07:35, 16.28s/it]stardist:  25%|██▌       | 9/36 [02:52<06:37, 14.73s/it]stardist:  28%|██▊       | 10/36 [03:04<06:07, 14.14s/it]stardist:  31%|███       | 11/36 [03:19<05:55, 14.22s/it]stardist:  33%|███▎      | 12/36 [03:35<05:52, 14.69s/it]stardist:  36%|███▌      | 13/36 [03:43<04:55, 12.86s/it]stardist:  39%|███▉      | 14/36 [03:53<04:22, 11.91s/it]stardist:  42%|████▏     | 15/36 [04:04<04:04, 11.66s/it]stardist:  44%|████▍     | 16/36 [04:22<04:28, 13.45s/it]stardist:  47%|████▋     | 17/36 [04:34<04:08, 13.09s/it]stardist:  50%|█████     | 18/36 [04:44<03:40, 12.23s/it]stardist:  53%|█████▎    | 19/36 [04:58<03:36, 12.76s/it]stardist:  56%|█████▌    | 20/36 [05:18<03:58, 14.89s/it]stardist:  58%|█████▊    | 21/36 [05:28<03:21, 13.42s/it]stardist:  61%|██████    | 22/36 [05:39<02:59, 12.85s/it]stardist:  64%|██████▍   | 23/36 [05:48<02:28, 11.45s/it]stardist:  67%|██████▋   | 24/36 [05:59<02:18, 11.57s/it]stardist:  69%|██████▉   | 25/36 [06:11<02:06, 11.53s/it]stardist:  72%|███████▏  | 26/36 [06:19<01:44, 10.48s/it]stardist:  75%|███████▌  | 27/36 [06:35<01:48, 12.05s/it]stardist:  78%|███████▊  | 28/36 [06:42<01:26, 10.79s/it]stardist:  81%|████████  | 29/36 [07:01<01:31, 13.10s/it]stardist:  83%|████████▎ | 30/36 [07:18<01:26, 14.42s/it]stardist:  86%|████████▌ | 31/36 [07:27<01:02, 12.56s/it]stardist:  89%|████████▉ | 32/36 [07:36<00:46, 11.65s/it]stardist:  92%|█████████▏| 33/36 [07:51<00:37, 12.65s/it]stardist:  94%|█████████▍| 34/36 [08:13<00:30, 15.45s/it]stardist:  97%|█████████▋| 35/36 [08:22<00:13, 13.61s/it]stardist: 100%|██████████| 36/36 [08:32<00:00, 12.46s/it]stardist: 100%|██████████| 36/36 [08:32<00:00, 14.24s/it]
+sh: /storeData/USER/software/shican/Anaconda3/envs/hovernet/bin/python: Permission denied
+sh: /storeData/USER/software/shican/Anaconda3/envs/cellpose/bin/python: Permission denied
+/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose4/lib/python3.8/site-packages/torch/_utils.py:776: UserWarning: TypedStorage is deprecated. It will be removed in the future and UntypedStorage will be the only storage class. This should only matter to you if you are using storages directly.  To access UntypedStorage directly, use tensor.untyped_storage() instead of tensor.storage()
+  return self.fget.__get__(instance, owner)()
+
+
+Welcome to CellposeSAM, cellpose v
+cellpose version: 	4.0.4 
+platform:       	linux 
+python version: 	3.8.19 
+torch version:  	2.0.1! The neural network component of
+CPSAM is much larger than in previous versions and CPU excution is slow. 
+We encourage users to use GPU/MPS if available. 
+
+
+正在处理 36 张图像
+Cellpose4:   0%|          | 0/36 [00:00<?, ?it/s]Cellpose4:   3%|▎         | 1/36 [01:55<1:07:11, 115.17s/it]Cellpose4:   6%|▌         | 2/36 [03:47<1:04:21, 113.57s/it]Cellpose4:   8%|▊         | 3/36 [05:23<57:56, 105.35s/it]  Cellpose4:  11%|█         | 4/36 [06:57<53:55, 101.10s/it]Cellpose4:  14%|█▍        | 5/36 [08:49<54:14, 104.98s/it]Cellpose4:  17%|█▋        | 6/36 [10:43<54:01, 108.06s/it]Cellpose4:  19%|█▉        | 7/36 [12:38<53:22, 110.43s/it]Cellpose4:  22%|██▏       | 8/36 [14:13<49:11, 105.41s/it]Cellpose4:  25%|██▌       | 9/36 [15:50<46:14, 102.75s/it]Cellpose4:  28%|██▊       | 10/36 [17:43<45:55, 105.98s/it]Cellpose4:  31%|███       | 11/36 [19:36<45:03, 108.16s/it]Cellpose4:  33%|███▎      | 12/36 [21:32<44:12, 110.51s/it]Cellpose4:  36%|███▌      | 13/36 [23:06<40:23, 105.39s/it]Cellpose4:  39%|███▉      | 14/36 [24:56<39:08, 106.76s/it]Cellpose4:  42%|████▏     | 15/36 [26:48<37:55, 108.34s/it]Cellpose4:  44%|████▍     | 16/36 [28:46<37:06, 111.34s/it]Cellpose4:  47%|████▋     | 17/36 [30:39<35:27, 111.95s/it]Cellpose4:  50%|█████     | 18/36 [32:17<32:19, 107.75s/it]Cellpose4:  53%|█████▎    | 19/36 [34:11<31:03, 109.64s/it]Cellpose4:  56%|█████▌    | 20/36 [35:32<26:52, 100.77s/it]Cellpose4:  58%|█████▊    | 21/36 [37:23<26:00, 104.02s/it]Cellpose4:  61%|██████    | 22/36 [39:17<24:56, 106.88s/it]Cellpose4:  64%|██████▍   | 23/36 [40:51<22:19, 103.05s/it]Cellpose4:  67%|██████▋   | 24/36 [42:43<21:08, 105.73s/it]Cellpose4:  69%|██████▉   | 25/36 [44:33<19:36, 106.95s/it]no seeds found in get_masks_torch - no masks found.
+Cellpose4:  72%|███████▏  | 26/36 [46:22<17:58, 107.82s/it]Cellpose4:  75%|███████▌  | 27/36 [48:18<16:29, 109.99s/it]Cellpose4:  78%|███████▊  | 28/36 [50:07<14:38, 109.80s/it]Cellpose4:  81%|████████  | 29/36 [52:07<13:09, 112.85s/it]Cellpose4:  83%|████████▎ | 30/36 [54:05<11:25, 114.33s/it]Cellpose4:  86%|████████▌ | 31/36 [55:42<09:05, 109.10s/it]Cellpose4:  89%|████████▉ | 32/36 [57:19<07:02, 105.72s/it]Cellpose4:  92%|█████████▏| 33/36 [59:16<05:27, 109.01s/it]Cellpose4:  94%|█████████▍| 34/36 [1:01:15<03:43, 111.95s/it]Cellpose4:  97%|█████████▋| 35/36 [1:03:14<01:53, 113.98s/it]Cellpose4: 100%|██████████| 36/36 [1:05:09<00:00, 114.54s/it]Cellpose4: 100%|██████████| 36/36 [1:05:09<00:00, 108.61s/it]
+get 1 files
+/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/MEDIAR/bin/python /storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/MEDIAR/mediar_main.py -i /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/patches/H01108E3_HE_regist -o /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/MEDIAR/H01108E3_HE_regist -g 1 -t he
+MEDIAR ran for a total of 6251.894918203354 s
+[Info] MEDIAR result for H01108E3_HE_regist.tif saved to: /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/MEDIAR/H01108E3_HE_regist.tif
+python /storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/stardist_main.py -i /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/patches/H01108E3_HE_regist -o /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/stardist/H01108E3_HE_regist -g 1 -t he
+stardist ran for a total of 678.2599527835846 s
+[Info] stardist result for H01108E3_HE_regist.tif saved to: /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/stardist/H01108E3_HE_regist.tif
+/storeData/USER/software/shican/Anaconda3/envs/hovernet/bin/python /storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/hover_net/hovernet_main.py -i /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/patches/H01108E3_HE_regist -o /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/hovernet/H01108E3_HE_regist -g 1 -t he
+hovernet ran for a total of 0.23832964897155762 s
+Warning: Missing patch patch_0_0.tif, replaced with black patch.
+Warning: Missing patch patch_0_4000.tif, replaced with black patch.
+Warning: Missing patch patch_0_8000.tif, replaced with black patch.
+Warning: Missing patch patch_0_12000.tif, replaced with black patch.
+Warning: Missing patch patch_0_16000.tif, replaced with black patch.
+Warning: Missing patch patch_0_20000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_0.tif, replaced with black patch.
+Warning: Missing patch patch_4000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_20000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_0.tif, replaced with black patch.
+Warning: Missing patch patch_8000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_20000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_0.tif, replaced with black patch.
+Warning: Missing patch patch_12000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_20000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_0.tif, replaced with black patch.
+Warning: Missing patch patch_16000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_20000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_0.tif, replaced with black patch.
+Warning: Missing patch patch_20000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_20000.tif, replaced with black patch.
+[Info] hovernet result for H01108E3_HE_regist.tif saved to: /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/hovernet/H01108E3_HE_regist.tif
+/storeData/USER/software/shican/Anaconda3/envs/cellpose/bin/python /storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/sam_main.py -i /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/patches/H01108E3_HE_regist -o /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/sam/H01108E3_HE_regist -g 1 -t he
+sam ran for a total of 0.2544715404510498 s
+Warning: Missing patch patch_0_0.tif, replaced with black patch.
+Warning: Missing patch patch_0_4000.tif, replaced with black patch.
+Warning: Missing patch patch_0_8000.tif, replaced with black patch.
+Warning: Missing patch patch_0_12000.tif, replaced with black patch.
+Warning: Missing patch patch_0_16000.tif, replaced with black patch.
+Warning: Missing patch patch_0_20000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_0.tif, replaced with black patch.
+Warning: Missing patch patch_4000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_4000_20000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_0.tif, replaced with black patch.
+Warning: Missing patch patch_8000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_8000_20000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_0.tif, replaced with black patch.
+Warning: Missing patch patch_12000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_12000_20000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_0.tif, replaced with black patch.
+Warning: Missing patch patch_16000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_16000_20000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_0.tif, replaced with black patch.
+Warning: Missing patch patch_20000_4000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_8000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_12000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_16000.tif, replaced with black patch.
+Warning: Missing patch patch_20000_20000.tif, replaced with black patch.
+[Info] sam result for H01108E3_HE_regist.tif saved to: /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/sam/H01108E3_HE_regist.tif
+/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose4/bin/python /storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/cellpose4_main.py -i /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/patches/H01108E3_HE_regist -o /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/cellpose4/H01108E3_HE_regist -g 1 -t he
+cellpose4 ran for a total of 4098.82882809639 s
+[Info] cellpose4 result for H01108E3_HE_regist.tif saved to: /storeData/USER/data/01.CellBin/00.user/fanjinghong/data/H01108E3/output/cellpose4/H01108E3_HE_regist.tif

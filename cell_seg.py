@@ -13,13 +13,14 @@ __py__ = {
     'cellpose': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose/bin/python',
     'cellpose3': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose3/bin/python',
     'deepcell': '/storeData/USER/data/01.CellBin/00.user/shican/00.software/Miniconda3/envs/cellpose/bin/python',
-    'sam': '/storeData/USER/software/shican/Anaconda3/envs/cellpose/bin/python',
+    'sam': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose4/bin/python',
     'stardist': 'python',
     'cellprofiler': 'miniconda3/envs/cp4/bin/python',
-    'hovernet':'/storeData/USER/software/shican/Anaconda3/envs/hovernet/bin/python',
-    'cellpose4':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose4/bin/python'
+    'hovernet':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/hovernet/bin/python',
+    'cellpose4':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose4/bin/python',
+    'cellSAM':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellSAM/bin/python'
 }
-__methods__ = ['MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'cellprofiler','hovernet','cellpose4']
+__methods__ = ['MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'cellprofiler','hovernet','cellpose4','cellSAM']
 
 __script__ = {
     'MEDIAR': os.path.join(work_path, 'src/methods/MEDIAR/mediar_main.py'),
@@ -31,6 +32,7 @@ __script__ = {
     'cellprofiler': os.path.join(work_path, 'src/methods/cellprofiler/cellprofiler_main.py'),
     'hovernet':os.path.join(work_path,'src/methods/hover_net/hovernet_main.py'),
     'cellpose4':os.path.join(work_path,'src/methods/cellpose4_main.py'),
+    'cellSAM':os.path.join(work_path,'src/methods/cellSAM_main.py'),
 }
 
 def split_image(image, photo_size=2000, photo_step=1000):

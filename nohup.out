@@ -1,0 +1,6 @@
+usage: cell_seg.py [-h] -i INPUT -o OUTPUT -m METHOD [METHOD ...] -t IMG_TYPE
+                   [-g GPU]
+cell_seg.py: error: unrecognized arguments: output.log
+usage: cell_seg.py [-h] -i INPUT -o OUTPUT -m METHOD [METHOD ...] -t IMG_TYPE
+                   [-g GPU]
+cell_seg.py: error: unrecognized arguments: output.log
