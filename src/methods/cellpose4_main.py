@@ -19,7 +19,7 @@ def cellpose4_method(para, args):
         raise RuntimeError("GPU 不可用，请检查CUDA环境。")
 
     # 加载模型
-    model = models.CellposeModel(gpu=use_gpu)
+    model = models.CellposeModel(pretrained_model='/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/CSRefiner/finetuned_models/cellpose-sam_ss_Jul08_16-00-46/models/finetuned_cpsam_80_epoch',gpu=use_gpu)
 
     # 获取输入图像列表
     if os.path.isdir(input_path):
@@ -76,8 +76,8 @@ def cellpose4_method(para, args):
 
         # 保存掩膜图像
         name = os.path.basename(f)
+        #tifffile.imwrite(os.path.join(output_path, name), masks.astype(np.uint8), compression='zlib')
         tifffile.imwrite(os.path.join(output_path, name), semantics.astype(np.uint8), compression='zlib')
-
 
 USAGE = 'Cellpose4'
 PROG_VERSION = 'v0.0.1'

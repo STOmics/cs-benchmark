@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a benchmark for general cell segmentation models. We have deployed the following 8 cell segmentation methods: MEDIAR, Cellpose, Cellpose3, SAM, Stardist, Deepcell, Cellprofiler,Hovernet(only HE), along with code to evaluate the model segmentation performance. Through the command line or notebook, you can run 7 segmentation models or evaluate the performance of 7 models with one click.  
+This project is a benchmark for general cell segmentation models. We have deployed the following 10 cell segmentation methods: MEDIAR, Cellpose, Cellpose3, SAM, Stardist, Deepcell, Cellprofiler,cellpose4,cellSAM,Hovernet(only HE), along with code to evaluate the model segmentation performance. Through the command line or notebook, you can run 7 segmentation models or evaluate the performance of 7 models with one click.  
 Here is an evaluation example of DAPI staining in the [DEMO](https://github.com/STOmics/cs-benchmark/tree/30f2dce160c51ea42cd12e76010b5eab3a8c1dd2/demo/DAPI):
 ![Bar Chart](docs/DAPI_benchmark.png)
 
@@ -78,9 +78,11 @@ if you use **CellBinDB** in your work, please cite it
 ## Reference
 > [cellpose](https://github.com/MouseLand/cellpose)  
 > [cellpose3](https://github.com/MouseLand/cellpose)  
+> [cellpose4](https://github.com/MouseLand/cellpose)   
 > [deepcell](https://github.com/vanvalenlab/deepcell-tf)   
 > [sam](https://github.com/facebookresearch/segment-anything)   
 > [mediar](https://github.com/Lee-Gihun/MEDIAR)   
 > [stardist](https://github.com/stardist/stardist)   
 > [cellprofiler](https://github.com/CellProfiler)   
-> [Hovernet](https://github.com/vqdang/hover_net?tab=readme-ov-file)
+> [Hovernet](https://github.com/vqdang/hover_net?tab=readme-ov-file)  
+> [cellSAM](https://github.com/vanvalenlab/cellSAM)

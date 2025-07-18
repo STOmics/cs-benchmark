@@ -156,8 +156,8 @@ class CellSegEval(object):
             self._dt_list = [dt_path]
         else:
             self._dt_list = search_files(dt_path, ['.tif', '.png', '.jpg'])
-        self._gt_list = [imgpath for imgpath in self._dt_list if imgpath.replace('mask', 'img').replace(gt_path, dt_path) in self._dt_list]  # 只读取 DT 中有的 GT 对应的图片
-        #self._dt_list = [imgpath.replace('mask', 'img').replace(gt_path, dt_path) for imgpath in self._gt_list if imgpath.replace('mask', 'img').replace(gt_path, dt_path) in self._dt_list]  #只读取 GT中 有的DT
+        #self._gt_list = [imgpath for imgpath in self._dt_list if imgpath.replace('mask', 'img').replace(gt_path, dt_path) in self._dt_list]  # 只读取 DT 中有的 GT 对应的图片
+        self._dt_list = [imgpath.replace('mask', 'img').replace(gt_path, dt_path) for imgpath in self._gt_list if imgpath.replace('mask', 'img').replace(gt_path, dt_path) in self._dt_list]  #只读取 GT中 有的DT
 
         assert len(self._gt_list) == len(self._dt_list), 'Length of list GT {} are not equal to DT {}'.format(len(self._gt_list), len(self._dt_list))
 

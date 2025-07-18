@@ -20,7 +20,7 @@ def MEDIAR_method(para, args):
     input_path = para.image_path
     output_path = para.output
 
-    model_path = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/models/from_phase2.pth"
+    model_path = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/MEDIAR-SAM/checkpoints/checkpoint_epoch20.pth"
     #model_path = "/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/cs-benchmark/src/methods/models/MEDIAR_finetuning.pth"
     weights = torch.load(model_path, map_location="cpu")
 

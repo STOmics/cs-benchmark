@@ -13,13 +13,15 @@ __py__ = {
     'cellpose': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose/bin/python',
     'cellpose3': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose3/bin/python',
     'deepcell': '/storeData/USER/data/01.CellBin/00.user/shican/00.software/Miniconda3/envs/cellpose/bin/python',
-    'sam': '/storeData/USER/software/shican/Anaconda3/envs/cellpose/bin/python',
+    'sam': '/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose4/bin/python',
     'stardist': 'python',
     'cellprofiler': 'miniconda3/envs/cp4/bin/python',
-    'hovernet':'/storeData/USER/software/shican/Anaconda3/envs/hovernet/bin/python',
-    'cellpose4':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose4/bin/python'
+    'hovernet':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/hovernet/bin/python',
+    'cellpose4':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellpose4/bin/python',
+    'cellSAM':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellSAM/bin/python',
+    'cellbin':'/storeData/USER/data/01.CellBin/00.user/fanjinghong/home/anaconda3/envs/cellbin2/bin/python'
 }
-__methods__ = ['MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'cellprofiler','hovernet','cellpose4']
+__methods__ = ['MEDIAR', 'cellpose', 'cellpose3', 'sam', 'stardist', 'deepcell', 'cellprofiler','hovernet','cellpose4','cellSAM','cellbin']
 
 __script__ = {
     'MEDIAR': os.path.join(work_path, 'src/methods/MEDIAR/mediar_main.py'),
@@ -31,6 +33,8 @@ __script__ = {
     'cellprofiler': os.path.join(work_path, 'src/methods/cellprofiler/cellprofiler_main.py'),
     'hovernet':os.path.join(work_path,'src/methods/hover_net/hovernet_main.py'),
     'cellpose4':os.path.join(work_path,'src/methods/cellpose4_main.py'),
+    'cellSAM':os.path.join(work_path,'src/methods/cellSAM_main.py'),
+    'cellbin':os.path.join(work_path,'src/methods/cellbin_main.py'),
 }
 
 def split_image(image, photo_size=2000, photo_step=1000):
@@ -93,6 +97,7 @@ def main():
     parser.add_argument("-m", "--method", nargs='+', help='/'.join(__methods__), required=True)
     parser.add_argument("-t", "--img_type", help="ss/he", required=True)
     parser.add_argument("-g", "--gpu", help="the gpu index", default="-1")
+    parser.add_argument("-p", "--model", help="model dir")
 
     args = parser.parse_args()
     image_dir = args.input
@@ -100,6 +105,8 @@ def main():
     methods = args.method
     is_gpu = args.gpu
     img_type = args.img_type.lower()
+    model_dir = args.model
+
     processed_dir = image_dir
     assert os.path.isdir(image_dir), "Input path must be a directory"
     print(f'get {len(os.listdir(image_dir))} files')
@@ -132,8 +139,8 @@ def main():
             # Step 2: Process patches using methods
             for m in methods:
                 if m in ['cellprofier']:
-                    cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
-                         __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type)
+                    cmd = '{} {} -i {} -o {} -g {} -t {} -p {}'.format(
+                         __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type, model_dir)
                     print(cmd)
                     os.system(cmd)
                     t = time.time() - start
@@ -144,8 +151,8 @@ def main():
 
                 # Run the segmentation methods on the patch directory
                 start = time.time()
-                cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
-                    __py__[m], __script__[m], patch_output_dir, method_output_dir, is_gpu, img_type)
+                cmd = '{} {} -i {} -o {} -g {} -t {} -p {}'.format(
+                    __py__[m], __script__[m], patch_output_dir, method_output_dir, is_gpu, img_type, model_dir)
                 print(cmd)
                 os.system(cmd)
                 t = time.time() - start
@@ -186,18 +193,18 @@ def main():
         else:
             for m in methods:
                 start = time.time()
-                if m == 'cellprofiler':
-                    cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
-                        __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type)
+                if m == 'cellprofiler' or m == 'cellbin':
+                    cmd = '{} {} -i {} -o {} -g {} -t {} -p {}'.format(
+                        __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type, model_dir)
                 elif m == 'stardist' and img_type == 'he':
-                    cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
-                        __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type)
+                    cmd = '{} {} -i {} -o {} -g {} -t {} -p {}'.format(
+                        __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type, model_dir)
                 elif (m == 'cellpose' or  m == 'cellpose3' or m == 'MEDIAR') and img_type == 'mif':
-                    cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
-                        __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type)
+                    cmd = '{} {} -i {} -o {} -g {} -t {} -p {}'.format(
+                        __py__[m], __script__[m], image_dir, os.path.join(output_path, m), is_gpu, img_type, model_dir)
                 else:
-                    cmd = '{} {} -i {} -o {} -g {} -t {}'.format(
-                        __py__[m], __script__[m], processed_dir, os.path.join(output_path, m), is_gpu, img_type)
+                    cmd = '{} {} -i {} -o {} -g {} -t {} -p {}'.format(
+                        __py__[m], __script__[m], processed_dir, os.path.join(output_path, m), is_gpu, img_type, model_dir)
                 print(cmd)
                 os.system(cmd)
                 t = time.time() - start
