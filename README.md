@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a benchmark for general cell segmentation models. We have deployed the following 10 cell segmentation methods: MEDIAR, Cellpose, Cellpose3, SAM, Stardist, Deepcell, Cellprofiler,cellpose4,cellSAM,Hovernet(only HE), along with code to evaluate the model segmentation performance. Through the command line or notebook, you can run 7 segmentation models or evaluate the performance of 7 models with one click.  
+This project is a benchmark for general cell segmentation models. We have deployed the following 11 cell segmentation methods: MEDIAR, Cellpose, Cellpose3, SAM, Stardist, Deepcell, Cellprofiler,cellpose4,cellSAM,Hovernet(only HE),cellbin, along with code to evaluate the model segmentation performance. Through the command line or notebook, you can run 7 segmentation models or evaluate the performance of 7 models with one click.  
 Here is an evaluation example of DAPI staining in the [DEMO](https://github.com/STOmics/cs-benchmark/tree/30f2dce160c51ea42cd12e76010b5eab3a8c1dd2/demo/DAPI):
 ![Bar Chart](docs/DAPI_benchmark.png)
 
@@ -73,8 +73,8 @@ python src/eval/cell_eval_multi.py -g gt_path -d dt_path -o result_path
 
 ## Citation
 if you use **CellBinDB** in your work, please cite it  
-> Shi C, Fan J, Deng Z, et al. CellBinDB: A Large-Scale Multimodal Annotated Dataset for Cell Segmentation with Benchmarking of Universal Models[J]. bioRxiv, 2024: 2024.11. 20.619750.  
-> doi: https://doi.org/10.1101/2024.11.20.619750
+> Can Shi, Jinghong Fan, Zhonghan Deng, Huanlin Liu, Qiang Kang, Yumei Li, Jing Guo, Jingwen Wang, Jinjiang Gong, Sha Liao, Ao Chen, Ying Zhang, Mei Li, CellBinDB: a large-scale multimodal annotated dataset for cell segmentation with benchmarking of universal models, GigaScience, Volume 14, 2025, giaf069,   
+> [doi: https://doi.org/10.1101/2024.11.20.619750](https://doi.org/10.1093/gigascience/giaf069)
 ## Reference
 > [cellpose](https://github.com/MouseLand/cellpose)  
 > [cellpose3](https://github.com/MouseLand/cellpose)  
