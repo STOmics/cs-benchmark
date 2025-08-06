@@ -1,5 +1,5 @@
-import argparse
 import numpy as np
+import argparse
 import os
 import tensorflow as tf
 import cv2
@@ -96,6 +96,7 @@ def main():
     arg_parser.add_argument("-g", "--is_gpu", action="store", dest="is_gpu",
                             type=bool, default=False, help="Use GPU or not.")
     arg_parser.add_argument("-t", "--img_type", help="ss/he")
+    arg_parser.add_argument("-p", "--model", required=True, help="model dir", default="/models/weights")
     arg_parser.set_defaults(func=deepcell_method)
     (para, args) = arg_parser.parse_known_args()
     print(para, args)

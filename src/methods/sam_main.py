@@ -1,10 +1,10 @@
+import numpy as np
 import sys
 import copy
 import glob
 import os
 from segment_anything import sam_model_registry, SamAutomaticMaskGenerator
 import tifffile
-import numpy as np
 import cv2
 import traceback
 from tqdm import tqdm
@@ -230,7 +230,7 @@ if __name__ == '__main__':
     parser.add_argument("-m", "--sam_checkpoint", help="sam_checkpoint")
     parser.add_argument("-g", "--gpu", help="gpu decive", default='cuda:0')
     parser.add_argument("-t", "--img_type", help="stain type")
-
+    parser.add_argument("-p", "--model", required=True, help="model dir", default="/models/weights")
     args = parser.parse_args()
     input_path = args.input
     output_path = args.output

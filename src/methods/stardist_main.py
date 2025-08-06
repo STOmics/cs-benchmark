@@ -231,6 +231,7 @@ if __name__ == '__main__':
     parser.add_argument('-o', "--output", help="the output file")
     parser.add_argument("-g", "--gpu", help="the gpu index", default="-1")
     parser.add_argument("-t", "--img_type", help="ss/he")
+    parser.add_argument("-p", "--model", required=True, help="model dir", default="/models/weights")
     args = parser.parse_args()
     input_path = args.input
     output_path = args.output

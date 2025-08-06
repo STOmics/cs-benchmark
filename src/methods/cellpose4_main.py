@@ -19,7 +19,8 @@ def cellpose4_method(para, args):
         raise RuntimeError("GPU 不可用，请检查CUDA环境。")
 
     # 加载模型
-    model = models.CellposeModel(pretrained_model='/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/CSRefiner/finetuned_models/cellpose-sam_ss_Jul08_16-00-46/models/finetuned_cpsam_80_epoch',gpu=use_gpu)
+    #model = models.CellposeModel(pretrained_model='/storeData/USER/data/01.CellBin/00.user/fanjinghong/code/CSRefiner/finetuned_models/cellpose-sam_ss_Jul16_17-00-36/models/finetuned_cpsam_80_epoch',gpu=use_gpu)
+    model = models.CellposeModel(gpu=use_gpu)
 
     # 获取输入图像列表
     if os.path.isdir(input_path):
