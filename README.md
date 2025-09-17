@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This project is a benchmark for general cell segmentation models. We have deployed the following 11 cell segmentation methods: MEDIAR, Cellpose, Cellpose3, SAM, Stardist, Deepcell, Cellprofiler,cellpose4,cellSAM,Hovernet(only HE),cellbin, along with code to evaluate the model segmentation performance. Through the command line or notebook, you can run 7 segmentation models or evaluate the performance of 7 models with one click.  
+This project is a benchmark for general cell segmentation models. We have deployed the following 11 cell segmentation methods: MEDIAR, Cellpose, Cellpose3, SAM, Stardist, Deepcell, Cellprofiler,cellpose4,cellSAM,Hovernet(only HE),cellbin, along with code to evaluate the model segmentation performance. Through the command line or notebook, you can run 11 segmentation models or evaluate the performance of 11 models with one click.  
 Here is an evaluation example of DAPI staining in the [DEMO](https://github.com/STOmics/cs-benchmark/tree/30f2dce160c51ea42cd12e76010b5eab3a8c1dd2/demo/DAPI):
 ![Bar Chart](docs/DAPI_benchmark.png)
 
@@ -46,7 +46,7 @@ After downloading the model file, place it in the **src/methods/models** directo
 #### Cell segmentation
 - Modify the parameters in the following command and input it into the command line:  
 ```
-python cell_seg.py -i your_inputpath -o your_outputpath -m  cellpose3 sam -t ss -g True  
+python cell_seg.py -i your_inputpath -o your_outputpath -m  cellpose3 sam -t ss -g True -p src/methods/models/weights
 ```
 - Where:
 
@@ -55,6 +55,7 @@ python cell_seg.py -i your_inputpath -o your_outputpath -m  cellpose3 sam -t ss 
 -m is the algorithm(s) to be used (can specify multiple)  
 -t is the image type (ss/he/dapi/mif)  
 -g is the GPU index (True/False or num)  
+-p is the cellbin weight_path
 #### Segmentation evaluation
 - Ensure that the images in the gt folder have filenames with "**-mask**" and the images in the algorithm output mask folder have filenames with "**-img**", with only this difference in their names.   
   
